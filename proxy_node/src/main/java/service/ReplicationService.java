@@ -52,15 +52,39 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
 
     @Override
     public void getNodeForDownload(GetNodeForDownloadRequest request, StreamObserver<GetNodeForDownloadResponse> responseObserver) {
-        super.getNodeForDownload(request, responseObserver);
+        String filename = request.getFilename();
+        int node = 0;
+        try {
+            node = findMasterNode(filename);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println(node);
+        // TODO: connect with appropriate master node
+        GetNodeForDownloadResponse.Builder response = GetNodeForDownloadResponse.newBuilder();
+        response.getNodeip();
+
+        responseObserver.onNext(response.build());
+        responseObserver.onCompleted();
     }
 
     @Override
     public void getNodeForUpload(GetNodeForUploadRequest request, StreamObserver<GetNodeForUploadResponse> responseObserver) {
         String filename = request.getFilename();
         long filesize = request.getFilesize();
+        int node = 0;
+        try {
+            node = findMasterNode(filename);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println(node);
+        // TODO: connect with appropriate master node
+        GetNodeForUploadResponse.Builder response = GetNodeForUploadResponse.newBuilder();
+        response.getNodeip();
 
-        super.getNodeForUpload(request, responseObserver);
+        responseObserver.onNext(response.build());
+        responseObserver.onCompleted();
     }
 
     @Override
