@@ -26,7 +26,8 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
         return hashString;
     }
 
-    public int findNode(String hashString) {
+    public int findMasterNode(String str) throws NoSuchAlgorithmException {
+        String hashString = createHash(str);
         BigInteger decimal = new BigInteger(hashString, 16);
         int node = decimal.mod(new BigInteger("3")).intValue(); // TODO: dynamic number of nodes to modulo
         return node;
@@ -37,8 +38,7 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
         String node_ip = request.getNewnodeip();
         int node = 0;
         try {
-            String hash_value = createHash(node_ip);
-            node = findNode(hash_value);
+            node = findMasterNode(node_ip);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -57,6 +57,9 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
 
     @Override
     public void getNodeForUpload(GetNodeForUploadRequest request, StreamObserver<GetNodeForUploadResponse> responseObserver) {
+        String filename = request.getFilename();
+        long filesize = request.getFilesize();
+
         super.getNodeForUpload(request, responseObserver);
     }
 
