@@ -44,9 +44,8 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
         }
         System.out.println(node);
         StatusResponse.Builder response = StatusResponse.newBuilder();
-        response.getStatusValue();
 
-        responseObserver.onNext(response.build());
+        responseObserver.onNext(response.setStatus(response.getStatus()).build());
         responseObserver.onCompleted();
     }
 
@@ -62,9 +61,9 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
         System.out.println(node);
         // TODO: connect with appropriate master node
         GetNodeForDownloadResponse.Builder response = GetNodeForDownloadResponse.newBuilder();
-        response.getNodeip();
+        String node_ip = response.getNodeip();
 
-        responseObserver.onNext(response.build());
+        responseObserver.onNext(response.setNodeip(node_ip).build());
         responseObserver.onCompleted();
     }
 
@@ -81,9 +80,9 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
         System.out.println(node);
         // TODO: connect with appropriate master node
         GetNodeForUploadResponse.Builder response = GetNodeForUploadResponse.newBuilder();
-        response.getNodeip();
+        String node_ip = response.getNodeip();
 
-        responseObserver.onNext(response.build());
+        responseObserver.onNext(response.setNodeip(node_ip).build());
         responseObserver.onCompleted();
     }
 
