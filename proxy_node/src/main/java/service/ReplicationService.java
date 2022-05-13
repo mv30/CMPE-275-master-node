@@ -43,6 +43,7 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
             e.printStackTrace();
         }
         System.out.println(node);
+        // TODO: connect with appropriate master node
         StatusResponse.Builder response = StatusResponse.newBuilder();
 
         responseObserver.onNext(response.setStatus(response.getStatus()).build());
