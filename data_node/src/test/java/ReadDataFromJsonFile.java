@@ -1,3 +1,4 @@
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -16,5 +17,16 @@ public class ReadDataFromJsonFile {
         String lastName = (String) empjsonobj.get("lastName");
         System.out.println("first name " + firstName);
         System.out.println("last name " + lastName);
+
+        JSONArray jsonArray = (JSONArray)empjsonobj.get("address");
+        for(int i = 0; i < jsonArray.size(); i++) {
+            JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+            String street = (String) jsonObject.get("street");
+            String city = (String) jsonObject.get("city");
+            String state = (String) jsonObject.get("state");
+            System.out.println("street is " + street);
+            System.out.println("city is " + city);
+            System.out.println("state is " + state);
+        }
     }
 }
