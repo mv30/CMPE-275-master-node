@@ -89,7 +89,20 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
 
     @Override
     public void nodeDownUpdate(NodeDownUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
-        super.nodeDownUpdate(request, responseObserver);
+        String node_ip  = request.getNodeip();
+        System.out.println("Checking if node is down " + node_ip);
+        int node = 0;
+        try {
+            node = findMasterNode(node_ip);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println(node);
+        StatusResponse.Builder response = StatusResponse.newBuilder();
+
+        // Change status after receiving node info
+        responseObserver.onNext(response.setStatus(response.getStatus()).build());
+        responseObserver.onCompleted();
     }
 
     @Override
