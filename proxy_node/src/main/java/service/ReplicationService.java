@@ -6,6 +6,8 @@ import org.master.protos.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
 
@@ -107,16 +109,65 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
 
     @Override
     public void getNodeIpsForReplication(NodeIpsRequest request, StreamObserver<NodeIpsReply> responseObserver) {
-        super.getNodeIpsForReplication(request, responseObserver);
+        String filename = request.getFilename();
+        int node = 0;
+        try {
+            node = findMasterNode(filename);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println(node);
+        // TODO: connect with appropriate master node
+        NodeIpsReply.Builder response = NodeIpsReply.newBuilder();
+
+        // Change response after receiving node info
+        responseObserver.onNext(response.addNodeips(response.getNodeips(1)).build());
+        responseObserver.onCompleted();
     }
 
     @Override
     public void updateReplicationStatus(ReplicationDetailsRequest request, StreamObserver<ReplicationDetailsResponse> responseObserver) {
-        super.updateReplicationStatus(request, responseObserver);
+        String filename = request.getFilename();
+        String[] node_ips = {};
+        node_ips = request.getNodeipsList().toArray(node_ips);
+        int node = 0;
+
+        ReplicationDetailsResponse.Builder response = ReplicationDetailsResponse.newBuilder();
+
+        try {
+            for(String node_ip: node_ips) {
+                node = findMasterNode(node_ip);
+
+                // Change response after receiving node info
+                responseObserver.onNext(response.setStatus(response.getStatus()).build());
+            }
+        } catch(NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        responseObserver.onCompleted();
     }
 
     @Override
     public void getListOfFiles(GetListOfFilesRequest request, StreamObserver<GetListOfFilesResponse> responseObserver) {
-        super.getListOfFiles(request, responseObserver);
+        String[] node_ips = {};
+        node_ips = request.getNodeipsList().toArray(node_ips);
+        int node = 0;
+        ArrayList<String> filenames = new ArrayList<>();
+
+        try {
+            for(String node_ip: node_ips) {
+                node = findMasterNode(node_ip);
+                String file = "Get file from node after getting proto"; //To-do
+                filenames.add(file);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        GetListOfFilesResponse.Builder response = GetListOfFilesResponse.newBuilder();
+
+        //Change response after receiving node info
+        responseObserver.onNext(response.addAllFilenames(filenames).build());
+        responseObserver.onCompleted();
     }
 }
