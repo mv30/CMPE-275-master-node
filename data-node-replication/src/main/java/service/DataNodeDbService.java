@@ -4,12 +4,14 @@ import io.grpc.replication.DataNode.DataNodeStreamerGrpc;
 import io.grpc.replication.DataNode.DataPayload;
 import io.grpc.stub.StreamObserver;
 
-public class DataNodeService extends DataNodeStreamerGrpc.DataNodeStreamerImplBase {
+import java.io.File;
 
-    private final String filePath;
+public class DataNodeDbService extends DataNodeStreamerGrpc.DataNodeStreamerImplBase {
 
-    public DataNodeService( String filePath) {
-        this.filePath = filePath;
+    private final FileHandler fileHandler;
+
+    public DataNodeDbService(String filePath) {
+        this.fileHandler = new FileHandler(filePath);
     }
 
     @Override
@@ -20,13 +22,27 @@ public class DataNodeService extends DataNodeStreamerGrpc.DataNodeStreamerImplBa
 
     @Override
     public void setData(DataPayload request, StreamObserver<DataPayload> responseObserver) {
-        responseObserver.onNext(DataPayload.newBuilder().setKey("key-1").setValue("value-1").build());
+        String key = request.getKey();
+        String value = request.getValue();
+        try {
+            fileHandler.createOrUpdate(key, value);
+        } catch ( Exception e) {
+            e.printStackTrace();
+        }
+        responseObserver.onNext(DataPayload.newBuilder().setKey(key).setValue(value).build());
         responseObserver.onCompleted();
     }
 
     @Override
     public void getData(DataPayload request, StreamObserver<DataPayload> responseObserver) {
-        responseObserver.onNext(DataPayload.newBuilder().setKey("key-2").setValue("value-2").build());
+        String key = request.getKey();
+        String value = null;
+        try {
+            value = fileHandler.get(key);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        responseObserver.onNext(DataPayload.newBuilder().setKey(key).setValue(value).build());
         responseObserver.onCompleted();
     }
 }

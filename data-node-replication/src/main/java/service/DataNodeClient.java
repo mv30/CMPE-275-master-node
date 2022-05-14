@@ -45,8 +45,18 @@ public class DataNodeClient {
     }
 
     public static void main(String[] args) {
-        DataNodeClient client = new DataNodeClient( "localhost", 6090);
-        client.set("key","value");
-        client.get("key");
+        /*
+        *   Testing
+        * */
+        DataNodeClient client = new DataNodeClient( "localhost", 6091);
+        client.set("key1","value1");
+        client.set("key2","value2");
+        client.set("key3","value3");
+        client.set("key4","value4");
+        client.get("key1");
+        client.get("key2");
+        client.get("key3");
+        client.get("key4");
+        client.get("key1");
     }
 }
