@@ -5,11 +5,31 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class FileHandler {
+    public void readData(String key) throws IOException, ParseException {
+        ReadDataService readDataService = new ReadDataService();
+        System.out.println(readDataService.readDataForKey(key));
+    }
+    public void writeDatea(String key, String value) throws IOException, ParseException {
+        WriteDataService writeDataService = new WriteDataService();
+        JSONObject emp = new JSONObject();
+        emp.put(key, value);
+        writeDataService.writeDataForKey(emp);
+    }
+    public void updateData(String key, String value) throws IOException, ParseException {
+        UpdateDataService updateDataService = new UpdateDataService();
+        updateDataService.updateDataForKey(key, value);
+    }
+    public void deleteData(String key) throws IOException, ParseException {
+        DeleteDataService deleteDataService = new DeleteDataService();
+        deleteDataService.deleteDataForKey(key);
+    }
+    // If you want to test the CRUD you can directly do so by running main.
     public static void main(String[] args) throws IOException, ParseException {
         DeleteDataService deleteDataService = new DeleteDataService();
         ReadDataService readDataService = new ReadDataService();
         WriteDataService writeDataService = new WriteDataService();
         UpdateDataService updateDataService = new UpdateDataService();
+
         while(true) {
             System.out.println("Choose which file operation you want to do ");
             Scanner myObj = new Scanner(System.in);
