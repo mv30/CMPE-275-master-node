@@ -37,7 +37,7 @@ public class DataNodeServer {
 
     private void start() throws IOException {
         IpDetailsEntry ipDetailsEntry = monitorService.getPeerInfo(serverId);
-        server = ServerBuilder.forPort(ipDetailsEntry.getPortNo()).addService(new DataNodeDbService(ipDetailsEntry.getFilePath())).build().start();
+        server = ServerBuilder.forPort(ipDetailsEntry.getPortNo()).addService(new DataNodeDbService(ipDetailsEntry.getFilePath(), monitorService)).build().start();
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {

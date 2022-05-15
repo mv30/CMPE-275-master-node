@@ -89,10 +89,42 @@ public class MonitorService {
         return activeServerNodeIds.get(node);
     }
 
+    public int findMasterNode( String str) throws NoSuchAlgorithmException {
+        List<Integer> activeServerNodeIds = new ArrayList<>(dataNodePeers.keySet());
+        Integer totalNumberOfNodes = activeServerNodeIds.size();
+        String hashString = createHash(str);
+        BigInteger decimal = new BigInteger(hashString, 16);
+        int node = decimal.mod(BigInteger.valueOf(Long.valueOf(totalNumberOfNodes))).intValue();
+        return activeServerNodeIds.get(node);
+    }
+
     public int findReplicationNode( String str, List<Integer> activeServerNodeIds) throws NoSuchAlgorithmException {
         Integer masterNodeId = findMasterNode( str, activeServerNodeIds);
         Integer id = activeServerNodeIds.indexOf(masterNodeId);
         id = (id+1)%activeServerNodeIds.size();
         return activeServerNodeIds.get(id);
+    }
+
+    public int findReplicationNode( String str) throws NoSuchAlgorithmException {
+        List<Integer> activeServerNodeIds = new ArrayList<>(dataNodePeers.keySet());
+        Integer masterNodeId = findMasterNode( str, activeServerNodeIds);
+        Integer id = activeServerNodeIds.indexOf(masterNodeId);
+        id = (id+1)%activeServerNodeIds.size();
+        return activeServerNodeIds.get(id);
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        MonitorService monitorService = new MonitorService(-1);
+
+        Map<String, String> hm = new HashMap<>();
+        for( int i=0; i<10; i++) {
+            String key = String.format("key-%s",i);
+            String value = String.format("value-%s",i);
+            Integer masterNodeId = monitorService.findMasterNode(key);
+            Integer replicationNodeId = monitorService.findReplicationNode(key);
+            System.out.println(String.format(" key: %s masterNodeId:%s replication:%s", key, masterNodeId, replicationNodeId));
+            monitorService.getPeerInfo(masterNodeId).getDataNodeClient().set(key, value);
+        }
     }
 }
