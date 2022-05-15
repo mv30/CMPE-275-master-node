@@ -53,7 +53,7 @@ public class FaultToleranceService extends Thread {
     public void run() {
         System.out.println(String.format(" %s is monitoring other nodes ", serverId));
         try {
-            Thread.sleep(10000);
+            Thread.sleep(60000);
         } catch (Exception e) {
             e.printStackTrace();
         }
