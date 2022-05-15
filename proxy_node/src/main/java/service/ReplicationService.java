@@ -1,15 +1,33 @@
 package service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import entry.IpDetailsEntry;
+import io.grpc.replication.DataNode.DataPayload;
 import io.grpc.stub.StreamObserver;
 import org.master.protos.*;
-
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
+
+    MonitorService monitorService = new MonitorService(-1);
+    List<Integer> activeServerNodeIds = new ArrayList<>();
+
+    private int countActiveNodes() {
+        Set<Integer> inactivePeers = monitorService.getInactivePeers();
+        for(int inactivePeer : inactivePeers) {
+            monitorService.dataNodePeers.remove(inactivePeer);
+        }
+        activeServerNodeIds.clear();
+        activeServerNodeIds.addAll(monitorService.dataNodePeers.keySet());
+        return monitorService.dataNodePeers.size();
+    }
 
     private String convertToHex(final byte[] messageDigest) {
         BigInteger bigint = new BigInteger(1, messageDigest);
@@ -31,24 +49,14 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
     public int findMasterNode(String str) throws NoSuchAlgorithmException {
         String hashString = createHash(str);
         BigInteger decimal = new BigInteger(hashString, 16);
-        int node = decimal.mod(new BigInteger("3")).intValue(); // TODO: dynamic number of nodes to modulo
-        return node;
+        int node = decimal.mod(new BigInteger(String.valueOf(countActiveNodes()))).intValue();
+        return activeServerNodeIds.get(node);
     }
 
     @Override
     public void newNodeUpdate(NewNodeUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
-        String node_ip = request.getNewnodeip();
-        int node = 0;
-        try {
-            node = findMasterNode(node_ip);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        System.out.println(node);
-        // TODO: connect with appropriate master node
         StatusResponse.Builder response = StatusResponse.newBuilder();
-
-        responseObserver.onNext(response.setStatus(response.getStatus()).build());
+        responseObserver.onNext(response.setStatus(Status.SUCCESS).build());
         responseObserver.onCompleted();
     }
 
@@ -62,11 +70,11 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
             e.printStackTrace();
         }
         System.out.println(node);
-        // TODO: connect with appropriate master node
-        GetNodeForDownloadResponse.Builder response = GetNodeForDownloadResponse.newBuilder();
-        String node_ip = response.getNodeip();
+        IpDetailsEntry ip_entry = monitorService.dataNodePeers.get(node);
+        DataPayload dataPayload = ip_entry.getDataNodeClient().get(filename);
 
-        responseObserver.onNext(response.setNodeip(node_ip).build());
+        GetNodeForDownloadResponse.Builder response = GetNodeForDownloadResponse.newBuilder();
+        responseObserver.onNext(response.setNodeip(dataPayload.getValue()).build());
         responseObserver.onCompleted();
     }
 
@@ -81,29 +89,18 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
             e.printStackTrace();
         }
         System.out.println(node);
-        // TODO: connect with appropriate master node
-        GetNodeForUploadResponse.Builder response = GetNodeForUploadResponse.newBuilder();
-        String node_ip = response.getNodeip();
+        IpDetailsEntry ip_entry = monitorService.dataNodePeers.get(node);
+        DataPayload dataPayload = ip_entry.getDataNodeClient().get(filename);
 
-        responseObserver.onNext(response.setNodeip(node_ip).build());
+        GetNodeForUploadResponse.Builder response = GetNodeForUploadResponse.newBuilder();
+        responseObserver.onNext(response.setNodeip(dataPayload.getValue()).build());
         responseObserver.onCompleted();
     }
 
     @Override
     public void nodeDownUpdate(NodeDownUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
-        String node_ip  = request.getNodeip();
-        System.out.println("Checking if node is down " + node_ip);
-        int node = 0;
-        try {
-            node = findMasterNode(node_ip);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        System.out.println(node);
         StatusResponse.Builder response = StatusResponse.newBuilder();
-
-        // Change status after receiving node info
-        responseObserver.onNext(response.setStatus(response.getStatus()).build());
+        responseObserver.onNext(response.setStatus(Status.FAILURE).build());
         responseObserver.onCompleted();
     }
 
@@ -111,17 +108,19 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
     public void getNodeIpsForReplication(NodeIpsRequest request, StreamObserver<NodeIpsReply> responseObserver) {
         String filename = request.getFilename();
         int node = 0;
+        String[] node_ips = {};
         try {
             node = findMasterNode(filename);
-        } catch (NoSuchAlgorithmException e) {
+            System.out.println(node);
+            IpDetailsEntry ip_entry = monitorService.dataNodePeers.get(node);
+            DataPayload dataPayload = ip_entry.getDataNodeClient().get(filename);
+            ObjectMapper objectMapper = new ObjectMapper();
+            node_ips = objectMapper.readValue(dataPayload.getValue(), String[].class);
+        } catch (NoSuchAlgorithmException | JsonProcessingException e) {
             e.printStackTrace();
         }
-        System.out.println(node);
-        // TODO: connect with appropriate master node
         NodeIpsReply.Builder response = NodeIpsReply.newBuilder();
-
-        // Change response after receiving node info
-        responseObserver.onNext(response.addNodeips(response.getNodeips(1)).build());
+        responseObserver.onNext(response.addAllNodeips(Arrays.asList(node_ips)).build());
         responseObserver.onCompleted();
     }
 
@@ -130,21 +129,22 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
         String filename = request.getFilename();
         String[] node_ips = {};
         node_ips = request.getNodeipsList().toArray(node_ips);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String nodeIpJson = "";
         int node = 0;
-
-        ReplicationDetailsResponse.Builder response = ReplicationDetailsResponse.newBuilder();
-
+        boolean flag = true;
         try {
-            for(String node_ip: node_ips) {
-                node = findMasterNode(node_ip);
-
-                // Change response after receiving node info
-                responseObserver.onNext(response.setStatus(response.getStatus()).build());
-            }
-        } catch(NoSuchAlgorithmException e) {
+            node = findMasterNode(filename);
+            System.out.println(node);
+            nodeIpJson = objectMapper.writeValueAsString(node_ips);
+            IpDetailsEntry ip_entry = monitorService.dataNodePeers.get(node);
+            ip_entry.getDataNodeClient().set(filename, nodeIpJson);
+        } catch(NoSuchAlgorithmException | JsonProcessingException e) {
+            flag = false;
             e.printStackTrace();
         }
-
+        ReplicationDetailsResponse.Builder response = ReplicationDetailsResponse.newBuilder();
+        responseObserver.onNext(response.setStatus(flag == true ? Status.SUCCESS : Status.FAILURE).build());
         responseObserver.onCompleted();
     }
 
@@ -158,15 +158,13 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
         try {
             for(String node_ip: node_ips) {
                 node = findMasterNode(node_ip);
-                String file = "Get file from node after getting proto"; //To-do
+                String file = "Get file from node after getting proto";
                 filenames.add(file);
             }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         GetListOfFilesResponse.Builder response = GetListOfFilesResponse.newBuilder();
-
-        //Change response after receiving node info
         responseObserver.onNext(response.addAllFilenames(filenames).build());
         responseObserver.onCompleted();
     }
