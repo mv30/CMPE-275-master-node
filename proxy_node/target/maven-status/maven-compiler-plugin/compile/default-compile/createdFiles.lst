@@ -1,5 +1,6 @@
 org/master/protos/GetListOfFilesResponse.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$DataNodeStreamerBlockingStub.class
+ProxyNodeClient.class
 org/master/protos/GetNodeForDownloadRequest.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$DataNodeStreamerFileDescriptorSupplier.class
 org/master/protos/NodeIpsReply$1.class

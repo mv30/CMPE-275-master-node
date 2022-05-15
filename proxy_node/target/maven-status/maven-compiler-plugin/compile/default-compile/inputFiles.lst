@@ -23,6 +23,7 @@
 /Users/mayankgarg/Documents/CMPE-275/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/GetNodeForDownloadResponseOrBuilder.java
 /Users/mayankgarg/Documents/CMPE-275/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/MasterComm.java
 /Users/mayankgarg/Documents/CMPE-275/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NodeIpsRequest.java
+/Users/mayankgarg/Documents/CMPE-275/CMPE-275-master-node/proxy_node/src/main/java/ProxyNodeClient.java
 /Users/mayankgarg/Documents/CMPE-275/CMPE-275-master-node/proxy_node/src/main/java/service/MonitorService.java
 /Users/mayankgarg/Documents/CMPE-275/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NodeDownUpdateRequest.java
 /Users/mayankgarg/Documents/CMPE-275/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/GetNodeForUploadResponse.java

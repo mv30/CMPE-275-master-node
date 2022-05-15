@@ -11,7 +11,7 @@ public class MonitorService {
 
     private final Integer hostServerId;
 
-    public final Map<Integer, IpDetailsEntry> dataNodePeers;
+    private final Map<Integer, IpDetailsEntry> dataNodePeers;
 
     public MonitorService( Integer hostServerId) {
         if (hostServerId==null) {
@@ -19,9 +19,9 @@ public class MonitorService {
         }
         this.hostServerId = hostServerId;
         this.dataNodePeers = new HashMap<>();
-        this.dataNodePeers.put( 1, new IpDetailsEntry( "localhost", 6091, "/Users/mayankverma/replicated-data/replication-1"));
-        this.dataNodePeers.put( 2, new IpDetailsEntry( "localhost", 6092, "/Users/mayankverma/replicated-data/replication-2"));
-        this.dataNodePeers.put( 3, new IpDetailsEntry( "localhost", 6093, "/Users/mayankverma/replicated-data/replication-3"));
+        this.dataNodePeers.put( 1, new IpDetailsEntry( "localhost", 6091, "../replicated-data/replication-1"));
+        this.dataNodePeers.put( 2, new IpDetailsEntry( "localhost", 6092, "../replicated-data/replication-2"));
+        this.dataNodePeers.put( 3, new IpDetailsEntry( "localhost", 6093, "../replicated-data/replication-3"));
     }
 
     public Integer getHostServerId() {

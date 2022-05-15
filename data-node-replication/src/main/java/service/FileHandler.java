@@ -97,7 +97,7 @@ public class FileHandler {
         /*
         * Testing
         * */
-        FileHandler fileHandler = new FileHandler("/Users/mayankverma/replicated-data");
+        FileHandler fileHandler = new FileHandler("../replicated-data");
         fileHandler.createOrUpdate("name", "Mayank");
         fileHandler.createOrUpdate("university", "SJSU");
         fileHandler.createOrUpdate("school", "APS");

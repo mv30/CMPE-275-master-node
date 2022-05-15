@@ -21,12 +21,15 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
 
     private int countActiveNodes() {
         Set<Integer> inactivePeers = monitorService.getInactivePeers();
+        System.out.println("Inactive Peers: " + inactivePeers);
         for(int inactivePeer : inactivePeers) {
-            monitorService.dataNodePeers.remove(inactivePeer);
+            monitorService.removePeer(inactivePeer);
         }
         activeServerNodeIds.clear();
-        activeServerNodeIds.addAll(monitorService.dataNodePeers.keySet());
-        return monitorService.dataNodePeers.size();
+        activeServerNodeIds.addAll(monitorService.getAllServerIds());
+        System.out.println("Active Peers: " + activeServerNodeIds);
+        System.out.println("Active Peers Size: " + activeServerNodeIds.size());
+        return activeServerNodeIds.size();
     }
 
     private String convertToHex(final byte[] messageDigest) {
@@ -55,6 +58,17 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
 
     @Override
     public void newNodeUpdate(NewNodeUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
+        String nodeIp = request.getNewnodeip();
+        int node = 0;
+        try {
+            node = findMasterNode(nodeIp);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Data Node: " + node);
+        IpDetailsEntry ip_entry = monitorService.getPeerInfo(node);
+        ip_entry.getDataNodeClient().set("key1", nodeIp);
+
         StatusResponse.Builder response = StatusResponse.newBuilder();
         responseObserver.onNext(response.setStatus(Status.SUCCESS).build());
         responseObserver.onCompleted();
@@ -69,8 +83,8 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        System.out.println(node);
-        IpDetailsEntry ip_entry = monitorService.dataNodePeers.get(node);
+        System.out.println("Data Node: " + node);
+        IpDetailsEntry ip_entry = monitorService.getPeerInfo(node);
         DataPayload dataPayload = ip_entry.getDataNodeClient().get(filename);
 
         GetNodeForDownloadResponse.Builder response = GetNodeForDownloadResponse.newBuilder();
@@ -88,8 +102,8 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        System.out.println(node);
-        IpDetailsEntry ip_entry = monitorService.dataNodePeers.get(node);
+        System.out.println("Data Node: " + node);
+        IpDetailsEntry ip_entry = monitorService.getPeerInfo(node);
         DataPayload dataPayload = ip_entry.getDataNodeClient().get(filename);
 
         GetNodeForUploadResponse.Builder response = GetNodeForUploadResponse.newBuilder();
@@ -99,6 +113,17 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
 
     @Override
     public void nodeDownUpdate(NodeDownUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
+        String nodeIp = request.getNodeip();
+        int node = 0;
+        try {
+            node = findMasterNode(nodeIp);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Data Node: " + node);
+        IpDetailsEntry ip_entry = monitorService.getPeerInfo(node);
+        ip_entry.getDataNodeClient().get(nodeIp);
+
         StatusResponse.Builder response = StatusResponse.newBuilder();
         responseObserver.onNext(response.setStatus(Status.FAILURE).build());
         responseObserver.onCompleted();
@@ -112,7 +137,7 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
         try {
             node = findMasterNode(filename);
             System.out.println(node);
-            IpDetailsEntry ip_entry = monitorService.dataNodePeers.get(node);
+            IpDetailsEntry ip_entry = monitorService.getPeerInfo(node);
             DataPayload dataPayload = ip_entry.getDataNodeClient().get(filename);
             ObjectMapper objectMapper = new ObjectMapper();
             node_ips = objectMapper.readValue(dataPayload.getValue(), String[].class);
@@ -137,7 +162,7 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
             node = findMasterNode(filename);
             System.out.println(node);
             nodeIpJson = objectMapper.writeValueAsString(node_ips);
-            IpDetailsEntry ip_entry = monitorService.dataNodePeers.get(node);
+            IpDetailsEntry ip_entry = monitorService.getPeerInfo(node);
             ip_entry.getDataNodeClient().set(filename, nodeIpJson);
         } catch(NoSuchAlgorithmException | JsonProcessingException e) {
             flag = false;
