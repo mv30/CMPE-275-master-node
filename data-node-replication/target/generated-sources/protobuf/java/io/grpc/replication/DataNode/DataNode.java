@@ -30,13 +30,14 @@ public final class DataNode {
     java.lang.String[] descriptorData = {
       "\n\rmessage.proto\022\007message\"=\n\013DataPayload\022" +
       "\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\022\022\n\ndataNodeI" +
-      "d\030\003 \001(\t2\300\001\n\020DataNodeStreamer\022:\n\nhealthPo" +
+      "d\030\003 \001(\t2\374\001\n\020DataNodeStreamer\022:\n\nhealthPo" +
       "ll\022\024.message.DataPayload\032\024.message.DataP" +
       "ayload\"\000\0227\n\007setData\022\024.message.DataPayloa" +
       "d\032\024.message.DataPayload\"\000\0227\n\007getData\022\024.m" +
       "essage.DataPayload\032\024.message.DataPayload" +
-      "\"\000B0\n\034io.grpc.replication.DataNodeB\010Data" +
-      "NodeP\001\242\002\003HLWb\006proto3"
+      "\"\000\022:\n\nremoveData\022\024.message.DataPayload\032\024" +
+      ".message.DataPayload\"\000B0\n\034io.grpc.replic" +
+      "ation.DataNodeB\010DataNodeP\001\242\002\003HLWb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

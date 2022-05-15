@@ -4,8 +4,6 @@ import io.grpc.replication.DataNode.DataNodeStreamerGrpc;
 import io.grpc.replication.DataNode.DataPayload;
 import io.grpc.stub.StreamObserver;
 
-import java.io.File;
-
 public class DataNodeDbService extends DataNodeStreamerGrpc.DataNodeStreamerImplBase {
 
     private final FileHandler fileHandler;
@@ -39,6 +37,19 @@ public class DataNodeDbService extends DataNodeStreamerGrpc.DataNodeStreamerImpl
         String value = null;
         try {
             value = fileHandler.get(key);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        responseObserver.onNext(DataPayload.newBuilder().setKey(key).setValue(value).build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void removeData(DataPayload request, StreamObserver<DataPayload> responseObserver) {
+        String key = request.getKey();
+        String value = null;
+        try {
+            value = fileHandler.remove(key).getValue();
         }catch (Exception e) {
             e.printStackTrace();
         }

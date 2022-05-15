@@ -108,6 +108,37 @@ public final class DataNodeStreamerGrpc {
     return getGetDataMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<io.grpc.replication.DataNode.DataPayload,
+      io.grpc.replication.DataNode.DataPayload> getRemoveDataMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "removeData",
+      requestType = io.grpc.replication.DataNode.DataPayload.class,
+      responseType = io.grpc.replication.DataNode.DataPayload.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<io.grpc.replication.DataNode.DataPayload,
+      io.grpc.replication.DataNode.DataPayload> getRemoveDataMethod() {
+    io.grpc.MethodDescriptor<io.grpc.replication.DataNode.DataPayload, io.grpc.replication.DataNode.DataPayload> getRemoveDataMethod;
+    if ((getRemoveDataMethod = DataNodeStreamerGrpc.getRemoveDataMethod) == null) {
+      synchronized (DataNodeStreamerGrpc.class) {
+        if ((getRemoveDataMethod = DataNodeStreamerGrpc.getRemoveDataMethod) == null) {
+          DataNodeStreamerGrpc.getRemoveDataMethod = getRemoveDataMethod =
+              io.grpc.MethodDescriptor.<io.grpc.replication.DataNode.DataPayload, io.grpc.replication.DataNode.DataPayload>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "removeData"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.grpc.replication.DataNode.DataPayload.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.grpc.replication.DataNode.DataPayload.getDefaultInstance()))
+              .setSchemaDescriptor(new DataNodeStreamerMethodDescriptorSupplier("removeData"))
+              .build();
+        }
+      }
+    }
+    return getRemoveDataMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -177,6 +208,13 @@ public final class DataNodeStreamerGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetDataMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void removeData(io.grpc.replication.DataNode.DataPayload request,
+        io.grpc.stub.StreamObserver<io.grpc.replication.DataNode.DataPayload> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRemoveDataMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -200,6 +238,13 @@ public final class DataNodeStreamerGrpc {
                 io.grpc.replication.DataNode.DataPayload,
                 io.grpc.replication.DataNode.DataPayload>(
                   this, METHODID_GET_DATA)))
+          .addMethod(
+            getRemoveDataMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                io.grpc.replication.DataNode.DataPayload,
+                io.grpc.replication.DataNode.DataPayload>(
+                  this, METHODID_REMOVE_DATA)))
           .build();
     }
   }
@@ -241,6 +286,14 @@ public final class DataNodeStreamerGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetDataMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void removeData(io.grpc.replication.DataNode.DataPayload request,
+        io.grpc.stub.StreamObserver<io.grpc.replication.DataNode.DataPayload> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getRemoveDataMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -276,6 +329,13 @@ public final class DataNodeStreamerGrpc {
     public io.grpc.replication.DataNode.DataPayload getData(io.grpc.replication.DataNode.DataPayload request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetDataMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public io.grpc.replication.DataNode.DataPayload removeData(io.grpc.replication.DataNode.DataPayload request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRemoveDataMethod(), getCallOptions(), request);
     }
   }
 
@@ -316,11 +376,20 @@ public final class DataNodeStreamerGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetDataMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<io.grpc.replication.DataNode.DataPayload> removeData(
+        io.grpc.replication.DataNode.DataPayload request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getRemoveDataMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_HEALTH_POLL = 0;
   private static final int METHODID_SET_DATA = 1;
   private static final int METHODID_GET_DATA = 2;
+  private static final int METHODID_REMOVE_DATA = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -349,6 +418,10 @@ public final class DataNodeStreamerGrpc {
           break;
         case METHODID_GET_DATA:
           serviceImpl.getData((io.grpc.replication.DataNode.DataPayload) request,
+              (io.grpc.stub.StreamObserver<io.grpc.replication.DataNode.DataPayload>) responseObserver);
+          break;
+        case METHODID_REMOVE_DATA:
+          serviceImpl.removeData((io.grpc.replication.DataNode.DataPayload) request,
               (io.grpc.stub.StreamObserver<io.grpc.replication.DataNode.DataPayload>) responseObserver);
           break;
         default:
@@ -415,6 +488,7 @@ public final class DataNodeStreamerGrpc {
               .addMethod(getHealthPollMethod())
               .addMethod(getSetDataMethod())
               .addMethod(getGetDataMethod())
+              .addMethod(getRemoveDataMethod())
               .build();
         }
       }

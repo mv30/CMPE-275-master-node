@@ -2,10 +2,10 @@ package service;
 
 import entry.IpDetailsEntry;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
 
 public class MonitorService {
 
@@ -26,6 +26,20 @@ public class MonitorService {
 
     public Integer getHostServerId() {
         return this.hostServerId;
+    }
+
+    public Set<Integer> getAllServerIds() {
+        return new HashSet<>(this.dataNodePeers.keySet());
+    }
+
+    public Integer getPeerSize() {
+        return this.dataNodePeers.size();
+    }
+
+    public IpDetailsEntry removePeer(Integer serverIdToRemove) {
+        IpDetailsEntry ipDetailsEntry = this.dataNodePeers.get(serverIdToRemove);
+        this.dataNodePeers.remove(serverIdToRemove);
+        return ipDetailsEntry;
     }
 
     public IpDetailsEntry getPeerInfo( Integer serverId) {
@@ -50,4 +64,35 @@ public class MonitorService {
         return inactiveServerIds;
     }
 
+    private String convertToHex(final byte[] messageDigest) {
+        BigInteger bigint = new BigInteger(1, messageDigest);
+        String hex = bigint.toString(16);
+        while (hex.length() < 32) {
+            hex = "0".concat(hex);
+        }
+        return hex;
+    }
+
+    public String createHash(String input) throws NoSuchAlgorithmException {
+        String hashString = null;
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] messageDigest = md.digest(input.getBytes());
+        hashString = convertToHex(messageDigest);
+        return hashString;
+    }
+
+    public int findMasterNode( String str, List<Integer> activeServerNodeIds) throws NoSuchAlgorithmException {
+        Integer totalNumberOfNodes = activeServerNodeIds.size();
+        String hashString = createHash(str);
+        BigInteger decimal = new BigInteger(hashString, 16);
+        int node = decimal.mod(BigInteger.valueOf(Long.valueOf(totalNumberOfNodes))).intValue();
+        return activeServerNodeIds.get(node);
+    }
+
+    public int findReplicationNode( String str, List<Integer> activeServerNodeIds) throws NoSuchAlgorithmException {
+        Integer masterNodeId = findMasterNode( str, activeServerNodeIds);
+        Integer id = activeServerNodeIds.indexOf(masterNodeId);
+        id = (id+1)%activeServerNodeIds.size();
+        return activeServerNodeIds.get(id);
+    }
 }

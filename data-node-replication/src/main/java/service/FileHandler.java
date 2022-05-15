@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.parser.JSONParser;
 
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -61,27 +62,50 @@ public class FileHandler {
         return null;
     }
 
-    public void createOrUpdate( String key, String value) throws Exception{
+    public DataEntry createOrUpdate( String key, String value) throws Exception{
         List<DataEntry> dataEntryList = getFileContent();
+        DataEntry dataEntryToUpdate = new DataEntry( key, value);
         if(get(key)==null) {
-            dataEntryList.add(new DataEntry(key, value));
+            dataEntryList.add(dataEntryToUpdate);
         } else {
             for( DataEntry dataEntry: dataEntryList) {
-                if(dataEntry.getKey().equals(key)) {
+                if(dataEntry.getKey().equals(dataEntryToUpdate.getKey())) {
                     dataEntry.setValue(value);
                 }
             }
         }
         writeData(dataEntryList);
+        return dataEntryToUpdate;
+    }
+
+    public DataEntry remove( String key) throws Exception {
+        DataEntry dataEntryRemoved = null;
+        List<DataEntry> dataEntryList = getFileContent();
+        List<DataEntry> dataEntryListToSave = new ArrayList<>();
+        for(DataEntry dataEntry: dataEntryList) {
+            if(dataEntry.getKey().equals(key)) {
+                dataEntryRemoved = dataEntry;
+                continue;
+            }
+            dataEntryListToSave.add(dataEntry);
+        }
+        writeData(dataEntryListToSave);
+        return dataEntryRemoved;
     }
 
     public static void main(String[] args) throws Exception {
+        /*
+        * Testing
+        * */
         FileHandler fileHandler = new FileHandler("/Users/mayankverma/replicated-data");
         fileHandler.createOrUpdate("name", "Mayank");
         fileHandler.createOrUpdate("university", "SJSU");
         fileHandler.createOrUpdate("school", "APS");
+        fileHandler.createOrUpdate("country", "USA");
         System.out.println(fileHandler.get("name"));
         System.out.println(fileHandler.get("university"));
         System.out.println(fileHandler.get("school"));
+        fileHandler.remove("university");
+        fileHandler.remove("school");
     }
 }

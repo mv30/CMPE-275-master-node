@@ -3,6 +3,7 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
 import service.DataNodeDbService;
+import service.FaultToleranceService;
 import service.MonitorService;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class DataNodeServer {
     public DataNodeServer( Integer serverId) {
         this.serverId = serverId;
         this.monitorService = new MonitorService(serverId);
+        new FaultToleranceService( serverId, monitorService).start();
     }
 
     private void blockUntilShutdown() throws InterruptedException {

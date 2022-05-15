@@ -44,6 +44,12 @@ public class DataNodeClient {
         System.out.println(dataPayload.getValue());
     }
 
+    public void remove( String key) {
+        DataPayload dataPayload = dataNodeStreamerBlockingStub.removeData(DataPayload.newBuilder().setKey(key).build());
+        System.out.println(dataPayload.getKey());
+        System.out.println(dataPayload.getValue());
+    }
+
     public static void main(String[] args) {
         /*
         *   Testing
@@ -57,6 +63,7 @@ public class DataNodeClient {
         client.get("key2");
         client.get("key3");
         client.get("key4");
-        client.get("key1");
+        client.remove("key1");
+        client.remove("key3");
     }
 }

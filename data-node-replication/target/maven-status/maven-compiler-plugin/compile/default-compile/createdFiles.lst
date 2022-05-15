@@ -14,11 +14,14 @@ io/grpc/replication/DataNode/DataPayloadOrBuilder.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$DataNodeStreamerImplBase.class
 service/DataNodeDbService.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$DataNodeStreamerStub.class
+service/FileHandler$1.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$1.class
 service/DataNodeClient.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$3.class
+service/DataEntry.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc.class
 io/grpc/replication/DataNode/DataPayload$1.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$DataNodeStreamerFutureStub.class
 io/grpc/replication/DataNode/DataPayload.class
 entry/IpDetailsEntry.class
+service/FaultToleranceService.class
