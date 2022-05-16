@@ -102,7 +102,11 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
             throw new RuntimeException(e);
         }
         Collections.shuffle(values);
-        responseObserver.onNext(GetNodeForDownloadResponse.newBuilder().setNodeip(values.get(0)).build());
+        String nodeIp = "";
+        if(!values.isEmpty()) {
+            nodeIp = values.get(0);
+        }
+        responseObserver.onNext(GetNodeForDownloadResponse.newBuilder().setNodeip(nodeIp).build());
         responseObserver.onCompleted();
     }
 
@@ -115,7 +119,11 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
             throw new RuntimeException(e);
         }
         Collections.shuffle(nodeIps);
-        responseObserver.onNext(GetNodeForUploadResponse.newBuilder().setNodeip(nodeIps.get(0)).build());
+        String nodeIp = "";
+        if(!nodeIp.isEmpty()) {
+            nodeIp = nodeIps.get(0);
+        }
+        responseObserver.onNext(GetNodeForUploadResponse.newBuilder().setNodeip(nodeIp).build());
         responseObserver.onCompleted();
     }
 
@@ -129,6 +137,17 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
         try {
             dataEntryList = activeNodesFileHandler.getFileContent().stream().filter( dataEntry -> !key.equals(dataEntry.getKey())).collect(Collectors.toList());
             activeNodesFileHandler.writeData(dataEntryList);
+            dataEntryList = keyValueFileHandler.getFileContent()
+                    .stream()
+                    .map(dataEntry -> {
+                        DataEntry newDateEntry = new DataEntry();
+                        newDateEntry.setKey(dataEntry.getKey());
+                        Set<String> values = new HashSet<>(dataEntry.getValues());
+                        values.remove(key);
+                        newDateEntry.setValues(new ArrayList<>(values));
+                        return newDateEntry;
+                    }).collect(Collectors.toList());
+            keyValueFileHandler.writeData(dataEntryList);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
