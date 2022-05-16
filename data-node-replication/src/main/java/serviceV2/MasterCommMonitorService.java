@@ -109,12 +109,23 @@ public class MasterCommMonitorService {
     }
 
     public GetNodeForDownloadResponse getNodeForDownload(GetNodeForDownloadRequest getNodeForDownloadRequest) {
-        IpDetailsEntry ipDetailsEntry = peers.get(hostServerId);
+        Integer replicationNode = hostServerId;
+        try {
+            if(hostServerId==-1) {
+                replicationNode = findReplicationNode(getNodeForDownloadRequest.getFilename());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        IpDetailsEntry ipDetailsEntry = peers.get(replicationNode);
         return ipDetailsEntry.getMasterCommDataNodeClient().getNodeForDownload(getNodeForDownloadRequest);
     }
 
     public GetNodeForUploadResponse getNodeForUpload( GetNodeForUploadRequest getNodeForUploadRequest) {
-        IpDetailsEntry ipDetailsEntry = peers.get(hostServerId);
+        List<Integer> activeDataNodeServerIds = new ArrayList<>(peers.keySet());
+        Collections.shuffle(activeDataNodeServerIds);
+        Integer dateNodeServerId = activeDataNodeServerIds.get(0);
+        IpDetailsEntry ipDetailsEntry = peers.get(dateNodeServerId);
         return ipDetailsEntry.getMasterCommDataNodeClient().getNodeForUpload(getNodeForUploadRequest);
     }
 
@@ -127,7 +138,15 @@ public class MasterCommMonitorService {
     }
 
     public NodeIpsReply getNodeIpsForReplication(NodeIpsRequest nodeIpsRequest) {
-        IpDetailsEntry ipDetailsEntry = peers.get(hostServerId);
+        Integer replicationNode = hostServerId;
+        try {
+            if(hostServerId==-1) {
+                replicationNode = findReplicationNode(nodeIpsRequest.getFilename());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        IpDetailsEntry ipDetailsEntry = peers.get(replicationNode);
         return ipDetailsEntry.getMasterCommDataNodeClient().getNodeIpsForReplication(nodeIpsRequest);
     }
 
@@ -210,32 +229,32 @@ public class MasterCommMonitorService {
 
     public static void main(String[] args) throws Exception {
 
-        MasterCommMonitorService masterCommMonitorService = new MasterCommMonitorService(1);
-        System.out.println(" Testing set data ");
-        masterCommMonitorService.setData(DataPayload
-                .newBuilder()
-                .setKey("cars")
-                .addAllValues(Arrays.asList("BMW", "Lexus", "Tesla")).build());
-        masterCommMonitorService.setData(DataPayload
-                .newBuilder()
-                .setKey("trucks")
-                .addAllValues(Arrays.asList("Tahoe", "GMD", "Mahindra", "BMW")).build());
-        masterCommMonitorService.setData(DataPayload
-                .newBuilder()
-                .setKey("bikes")
-                .addAllValues(Arrays.asList("Ninja", "Y2k", "Duke KTM")).build());
-        masterCommMonitorService.setData(DataPayload
-                .newBuilder()
-                .setKey("cars-1")
-                .addAllValues(Arrays.asList("BMW", "Lexus", "Tesla")).build());
-        masterCommMonitorService.setData(DataPayload
-                .newBuilder()
-                .setKey("trucks-1")
-                .addAllValues(Arrays.asList("Tahoe", "GMD", "Mahindra", "BMW")).build());
-        masterCommMonitorService.setData(DataPayload
-                .newBuilder()
-                .setKey("bikes-1")
-                .addAllValues(Arrays.asList("Ninja", "Y2k", "Duke KTM")).build());
+        MasterCommMonitorService masterCommMonitorService = new MasterCommMonitorService(-1);
+//        System.out.println(" Testing set data ");
+//        masterCommMonitorService.setData(DataPayload
+//                .newBuilder()
+//                .setKey("cars")
+//                .addAllValues(Arrays.asList("BMW", "Lexus", "Tesla")).build());
+//        masterCommMonitorService.setData(DataPayload
+//                .newBuilder()
+//                .setKey("trucks")
+//                .addAllValues(Arrays.asList("Tahoe", "GMD", "Mahindra", "BMW")).build());
+//        masterCommMonitorService.setData(DataPayload
+//                .newBuilder()
+//                .setKey("bikes")
+//                .addAllValues(Arrays.asList("Ninja", "Y2k", "Duke KTM")).build());
+//        masterCommMonitorService.setData(DataPayload
+//                .newBuilder()
+//                .setKey("cars-1")
+//                .addAllValues(Arrays.asList("BMW", "Lexus", "Tesla")).build());
+//        masterCommMonitorService.setData(DataPayload
+//                .newBuilder()
+//                .setKey("trucks-1")
+//                .addAllValues(Arrays.asList("Tahoe", "GMD", "Mahindra", "BMW")).build());
+//        masterCommMonitorService.setData(DataPayload
+//                .newBuilder()
+//                .setKey("bikes-1")
+//                .addAllValues(Arrays.asList("Ninja", "Y2k", "Duke KTM")).build());
 //        System.out.println(" Testing get data ");
 //        System.out.println(masterCommMonitorService.getData(
 //                DataPayload.newBuilder()
