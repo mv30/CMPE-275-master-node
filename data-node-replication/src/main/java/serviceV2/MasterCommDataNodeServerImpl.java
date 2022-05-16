@@ -53,6 +53,9 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
         List<String> values = new ArrayList<>();
         try {
             values = keyValueFileHandler.get(key);
+            if(values==null) {
+                values = new ArrayList<>();
+            }
         }catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -142,6 +145,9 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
         List<String> incomingValues = request.getNodeipsList();
         try {
             List<String> values = keyValueFileHandler.get(key);
+            if(values==null) {
+                values = new ArrayList<>();
+            }
             values.addAll(incomingValues);
             values = new ArrayList<>(new HashSet<>(values));
             keyValueFileHandler.createOrUpdate( key, values);

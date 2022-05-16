@@ -25,7 +25,7 @@ public class FileHandler {
         this.jsonParser = new JSONParser();
         this.objectMapper = new ObjectMapper();
         try {
-            FileWriter fw = new FileWriter(this.filePath);
+            FileWriter fw = new FileWriter(this.filePath, false);
             fw.write("[]");
             fw.close();
         }catch (Exception e) {
@@ -46,7 +46,7 @@ public class FileHandler {
 
     public void writeData( List<DataEntry> dataEntryList) throws Exception{
         String value = objectMapper.writeValueAsString(dataEntryList);
-        FileWriter fw = new FileWriter(this.filePath);
+        FileWriter fw = new FileWriter(this.filePath, false);
         fw.write(value);
         fw.close();
     }
@@ -58,13 +58,13 @@ public class FileHandler {
                 return dataEntry.getValues();
             }
         }
-        return new ArrayList<>();
+        return null;
     }
 
     public DataEntry createOrUpdate( String key, List<String> values) throws Exception{
         List<DataEntry> dataEntryList = getFileContent();
         DataEntry dataEntryToUpdate = new DataEntry( key, values);
-        if(get(key).isEmpty()) {
+        if(get(key)==null) {
             dataEntryList.add(dataEntryToUpdate);
         } else {
             for( DataEntry dataEntry: dataEntryList) {

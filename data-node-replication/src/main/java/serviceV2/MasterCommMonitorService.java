@@ -206,4 +206,75 @@ public class MasterCommMonitorService {
         id = (id+1)%activeServerNodeIds.size();
         return activeServerNodeIds.get(id);
     }
+
+    public static void main(String[] args) throws Exception {
+
+        MasterCommMonitorService masterCommMonitorService = new MasterCommMonitorService(1);
+        System.out.println(" Testing set data ");
+        masterCommMonitorService.setData(DataPayload
+                .newBuilder()
+                .setKey("cars")
+                .addAllValues(Arrays.asList("BMW", "Lexus", "Tesla")).build());
+        masterCommMonitorService.setData(DataPayload
+                .newBuilder()
+                .setKey("trucks")
+                .addAllValues(Arrays.asList("Tahoe", "GMD", "Mahindra")).build());
+        masterCommMonitorService.setData(DataPayload
+                .newBuilder()
+                .setKey("bikes")
+                .addAllValues(Arrays.asList("Ninja", "Y2k", "Duke KTM")).build());
+        System.out.println(" Testing get data ");
+        System.out.println(masterCommMonitorService.getData(
+                DataPayload.newBuilder()
+                        .setKey("cars").build()
+        ));
+        System.out.println(masterCommMonitorService.getData(
+                DataPayload.newBuilder()
+                        .setKey("trucks").build()
+        ));
+        System.out.println(masterCommMonitorService.getData(
+                DataPayload.newBuilder()
+                        .setKey("bikes").build()
+        ));
+        System.out.println(" Testing remove data ");
+        System.out.println(masterCommMonitorService.removeData(
+                DataPayload.newBuilder()
+                        .setKey("bikes").build()
+        ));
+        System.out.println(" Testing new node update ");
+        System.out.println(masterCommMonitorService
+                .newNodeUpdate(NewNodeUpdateRequest
+                .newBuilder()
+                .setNewnodeip("AWS")
+                .build()));
+        System.out.println(masterCommMonitorService
+                .newNodeUpdate(NewNodeUpdateRequest
+                        .newBuilder()
+                        .setNewnodeip("Azure")
+                        .build()));
+        System.out.println(masterCommMonitorService
+                .newNodeUpdate(NewNodeUpdateRequest
+                        .newBuilder()
+                        .setNewnodeip("GCP")
+                        .build()));
+        System.out.println(" get node for download ");
+        System.out.println(masterCommMonitorService
+                .getNodeForDownload(
+                        GetNodeForDownloadRequest
+                        .newBuilder()
+                        .setFilename("cars")
+                        .build()));
+        System.out.println(" get node for upload ");
+        System.out.println(masterCommMonitorService
+                .getNodeForUpload(GetNodeForUploadRequest
+                        .newBuilder()
+                        .setFilename("colours")
+                        .build()));
+        System.out.println(" node down update ");
+        System.out.println(masterCommMonitorService
+                .nodeDownUpdate(NodeDownUpdateRequest
+                        .newBuilder()
+                        .setNodeip("AWS")
+                        .build()));
+    }
 }
