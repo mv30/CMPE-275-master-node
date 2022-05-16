@@ -17,7 +17,7 @@ public class ProxyMasterFaultToleranceService extends Thread{
             return;
         }
         for(Integer faultServerId: faultyServerIds) {
-            System.out.println(String.format(" found & removed serverId: %s faulty from group of %s", faultServerId));
+            System.out.println(String.format(" found & removed serverId: %s faulty from group of %s", faultServerId, -1));
             masterCommMonitorService.removePeer(faultServerId);
         }
     }
