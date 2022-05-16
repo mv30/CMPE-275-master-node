@@ -3,8 +3,8 @@
 
 package org.master.protos;
 
-public final class MasterComm {
-  private MasterComm() {}
+public final class MasterCommDataNode {
+  private MasterCommDataNode() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -131,8 +131,9 @@ public final class MasterComm {
       "\022!.stream.ReplicationDetailsRequest\032\".st" +
       "ream.ReplicationDetailsResponse\"\000\022Q\n\016Get" +
       "ListOfFiles\022\035.stream.GetListOfFilesReque" +
-      "st\032\036.stream.GetListOfFilesResponse\"\000B\025\n\021" +
-      "org.master.protosP\001b\006proto3"
+      "st\032\036.stream.GetListOfFilesResponse\"\000B/\n\021" +
+      "org.master.protosB\022MasterCommDataNodeP\001\242" +
+      "\002\003HLWb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

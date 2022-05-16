@@ -1017,7 +1017,7 @@ public final class ReplicationGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return org.master.protos.MasterComm.getDescriptor();
+      return org.master.protos.MasterCommDataNode.getDescriptor();
     }
 
     @java.lang.Override

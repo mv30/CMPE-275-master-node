@@ -85,7 +85,7 @@ public enum Status
   }
   public static final com.google.protobuf.Descriptors.EnumDescriptor
       getDescriptor() {
-    return org.master.protos.MasterComm.getDescriptor().getEnumTypes().get(0);
+    return org.master.protos.MasterCommDataNode.getDescriptor().getEnumTypes().get(0);
   }
 
   private static final Status[] VALUES = values();

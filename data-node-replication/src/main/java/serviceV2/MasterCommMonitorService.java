@@ -21,9 +21,9 @@ public class MasterCommMonitorService {
     public MasterCommMonitorService( Integer hostServerId) {
         this.hostServerId = hostServerId;
         this.peers = new HashMap<>();
-        this.peers.put( 1, new IpDetailsEntry("localhost", 6091, "/Users/mayankverma/replicated-data/replication-1/data.json", "/Users/mayankverma/replicated-data/replication-1/servers.json"));
-        this.peers.put( 2, new IpDetailsEntry("localhost", 6092, "/Users/mayankverma/replicated-data/replication-2/data.json", "/Users/mayankverma/replicated-data/replication-2/servers.json"));
-        this.peers.put( 3, new IpDetailsEntry("localhost", 6093, "/Users/mayankverma/replicated-data/replication-3/data.json", "/Users/mayankverma/replicated-data/replication-3/servers.json"));
+        this.peers.put( 1, new IpDetailsEntry("localhost", 6091, "../replicated-data/replication-1/data.json", "../replicated-data/replication-1/servers.json"));
+        this.peers.put( 2, new IpDetailsEntry("localhost", 6092, "../replicated-data/replication-2/data.json", "../replicated-data/replication-2/servers.json"));
+        this.peers.put( 3, new IpDetailsEntry("localhost", 6093, "../replicated-data/replication-3/data.json", "../replicated-data/replication-3/servers.json"));
     }
 
     /*
