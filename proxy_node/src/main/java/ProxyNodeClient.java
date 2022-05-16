@@ -27,18 +27,16 @@ public class ProxyNodeClient {
         System.out.println(response.getStatus());
     }
 
-    public String getNodeForUpload(String filename, long filesize) {
+    public void getNodeForUpload(String filename, long filesize) {
         GetNodeForUploadResponse response = replicationBlockingStub.getNodeForUpload(GetNodeForUploadRequest.newBuilder().
                 setFilename(filename).setFilesize(filesize).build());
         System.out.println(response.getNodeip());
-        return response.getNodeip();
     }
 
-    public String getNodeForDownload(String filename) {
+    public void getNodeForDownload(String filename) {
         GetNodeForDownloadResponse response = replicationBlockingStub.getNodeForDownload(GetNodeForDownloadRequest.newBuilder().
                 setFilename(filename).build());
         System.out.println(response.getNodeip());
-        return response.getNodeip();
     }
 
     public void getNodeDownUpdate(String nodeIp) {
@@ -71,21 +69,36 @@ public class ProxyNodeClient {
         * */
         ProxyNodeClient client = new ProxyNodeClient( "localhost", 6090);
 
+        System.out.println("ADD NODE");
         client.addNewNode("168.212.226.204");
         client.addNewNode("168.212.226.205");
         client.addNewNode("168.212.226.206");
         client.addNewNode("168.212.226.207");
 
-        String nodeToUpload = client.getNodeForUpload("file1.txt", 1234);
+        System.out.println("NODE FOR FILE UPLOAD");
+        client.getNodeForUpload("file1.txt", 1234);
+        client.getNodeForUpload("file2.txt", 1234);
+        client.getNodeForUpload("file3.txt", 1234);
 
-        client.updateNodeReplicationStatus("file1.txt", Arrays.asList( "168.212. 226.204", "168.212. 226.205", "168.212. 226.206"));
+        System.out.println("UPDATE REPLICATION STATUS");
+        client.updateNodeReplicationStatus("file1.txt", Arrays.asList( "168.212. 226.204", "168.212. 226.205"));
+        client.updateNodeReplicationStatus("file2.txt", Arrays.asList( "168.212. 226.205", "168.212. 226.206"));
+        client.updateNodeReplicationStatus("file3.txt", Arrays.asList( "168.212. 226.206", "168.212. 226.207"));
 
-        String nodeIpToDownload = client.getNodeForDownload("file1.txt");
+        System.out.println("NODE FOR FILE DOWNLOAD");
+        client.getNodeForDownload("file1.txt");
+        client.getNodeForDownload("file2.txt");
+        client.getNodeForDownload("file3.txt");
 
+        System.out.println("NODE DOWN UPDATE");
         client.getNodeDownUpdate("168.212. 226.204");
 
+        System.out.println("NODES FILE REPLICATED TO");
         client.getNodeIpsForReplication("file1.txt");
+        client.getNodeIpsForReplication("file2.txt");
+        client.getNodeIpsForReplication("file3.txt");
 
-        client.getListOfFiles(new String[]{"172.16.0.9", "192.0.0.7", "198.18.0.6"});
+        System.out.println("LIST OF FILES");
+        client.getListOfFiles(new String[]{"168.212. 226.204", "168.212. 226.205", "168.212. 226.206", "168.212. 226.207"});
     }
 }
