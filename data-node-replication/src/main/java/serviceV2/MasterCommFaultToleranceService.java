@@ -5,6 +5,7 @@ import org.master.protos.DataPayload;
 import service.DataNodeClient;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -45,9 +46,12 @@ public class MasterCommFaultToleranceService extends Thread{
         Thread.sleep(5000);
         for(DataEntry dataEntry: dataEntryList) {
             Integer entryMasterNode = masterCommMonitorService.findMasterNode(dataEntry.getKey(), activeServerNodes);
-            if(entryMasterNode.equals(hostServerId)) {
-                Integer entryReplicationNode = masterCommMonitorService.findReplicationNode(dataEntry.getKey(), activeServerNodes);
-                MasterCommDataNodeClient masterCommDataNodeClient = masterCommMonitorService.getPeers().get(entryReplicationNode).getMasterCommDataNodeClient();
+            List<Integer> nodesToReplicate = Arrays.asList(
+                    masterCommMonitorService.findMasterNode(dataEntry.getKey(), activeServerNodes),
+                    masterCommMonitorService.findReplicationNode(dataEntry.getKey(), activeServerNodes)
+            );
+            for(Integer replicationNode: nodesToReplicate) {
+                MasterCommDataNodeClient masterCommDataNodeClient = masterCommMonitorService.getPeers().get(replicationNode).getMasterCommDataNodeClient();
                 masterCommDataNodeClient.setData(DataPayload.newBuilder().setKey(dataEntry.getKey()).addAllValues(dataEntry.getValues()).build());
             }
         }

@@ -28,6 +28,7 @@ public class MasterCommMonitorService {
 
     public IpDetailsEntry removePeer( Integer serverId) {
         IpDetailsEntry ipDetailsEntry = peers.get(serverId);
+        peers.remove(serverId);
         return ipDetailsEntry;
     }
 
@@ -223,65 +224,77 @@ public class MasterCommMonitorService {
                 .newBuilder()
                 .setKey("bikes")
                 .addAllValues(Arrays.asList("Ninja", "Y2k", "Duke KTM")).build());
-        System.out.println(" Testing get data ");
-        System.out.println(masterCommMonitorService.getData(
-                DataPayload.newBuilder()
-                        .setKey("cars").build()
-        ));
-        System.out.println(masterCommMonitorService.getData(
-                DataPayload.newBuilder()
-                        .setKey("trucks").build()
-        ));
-        System.out.println(masterCommMonitorService.getData(
-                DataPayload.newBuilder()
-                        .setKey("bikes").build()
-        ));
-        System.out.println(" Testing remove data ");
-        System.out.println(masterCommMonitorService.removeData(
-                DataPayload.newBuilder()
-                        .setKey("bikes").build()
-        ));
-        System.out.println(" Testing new node update ");
-        System.out.println(masterCommMonitorService
-                .newNodeUpdate(NewNodeUpdateRequest
+        masterCommMonitorService.setData(DataPayload
                 .newBuilder()
-                .setNewnodeip("AWS")
-                .build()));
-        System.out.println(masterCommMonitorService
-                .newNodeUpdate(NewNodeUpdateRequest
-                        .newBuilder()
-                        .setNewnodeip("Azure")
-                        .build()));
-        System.out.println(masterCommMonitorService
-                .newNodeUpdate(NewNodeUpdateRequest
-                        .newBuilder()
-                        .setNewnodeip("GCP")
-                        .build()));
-        System.out.println(" get node for download ");
-        System.out.println(masterCommMonitorService
-                .getNodeForDownload(
-                        GetNodeForDownloadRequest
-                        .newBuilder()
-                        .setFilename("cars")
-                        .build()));
-        System.out.println(" get node for upload ");
-        System.out.println(masterCommMonitorService
-                .getNodeForUpload(GetNodeForUploadRequest
-                        .newBuilder()
-                        .setFilename("colours")
-                        .build()));
-        System.out.println(" node down update ");
-        System.out.println(masterCommMonitorService
-                .nodeDownUpdate(NodeDownUpdateRequest
-                        .newBuilder()
-                        .setNodeip("AWS")
-                        .build()));
-        System.out.println(" get node ips for replication");
-        System.out.println(masterCommMonitorService.getNodeIpsForReplication(NodeIpsRequest.newBuilder().setFilename("cars").build()));
-        System.out.println(" update replication status ");
-        System.out.println(masterCommMonitorService.updateReplicationStatus(ReplicationDetailsRequest.newBuilder().setFilename("cars").addAllNodeips(Arrays.asList("Audi", "Polo")).build()));
-        System.out.println(masterCommMonitorService.getNodeIpsForReplication(NodeIpsRequest.newBuilder().setFilename("cars").build()));
-        System.out.println(" get list of all files ");
-        System.out.println(masterCommMonitorService.getListOfFiles(GetListOfFilesRequest.newBuilder().addAllNodeips(Arrays.asList("BMW")).build()));
+                .setKey("cars-1")
+                .addAllValues(Arrays.asList("BMW", "Lexus", "Tesla")).build());
+        masterCommMonitorService.setData(DataPayload
+                .newBuilder()
+                .setKey("trucks-1")
+                .addAllValues(Arrays.asList("Tahoe", "GMD", "Mahindra", "BMW")).build());
+        masterCommMonitorService.setData(DataPayload
+                .newBuilder()
+                .setKey("bikes-1")
+                .addAllValues(Arrays.asList("Ninja", "Y2k", "Duke KTM")).build());
+//        System.out.println(" Testing get data ");
+//        System.out.println(masterCommMonitorService.getData(
+//                DataPayload.newBuilder()
+//                        .setKey("cars").build()
+//        ));
+//        System.out.println(masterCommMonitorService.getData(
+//                DataPayload.newBuilder()
+//                        .setKey("trucks").build()
+//        ));
+//        System.out.println(masterCommMonitorService.getData(
+//                DataPayload.newBuilder()
+//                        .setKey("bikes").build()
+//        ));
+//        System.out.println(" Testing remove data ");
+//        System.out.println(masterCommMonitorService.removeData(
+//                DataPayload.newBuilder()
+//                        .setKey("bikes").build()
+//        ));
+//        System.out.println(" Testing new node update ");
+//        System.out.println(masterCommMonitorService
+//                .newNodeUpdate(NewNodeUpdateRequest
+//                .newBuilder()
+//                .setNewnodeip("AWS")
+//                .build()));
+//        System.out.println(masterCommMonitorService
+//                .newNodeUpdate(NewNodeUpdateRequest
+//                        .newBuilder()
+//                        .setNewnodeip("Azure")
+//                        .build()));
+//        System.out.println(masterCommMonitorService
+//                .newNodeUpdate(NewNodeUpdateRequest
+//                        .newBuilder()
+//                        .setNewnodeip("GCP")
+//                        .build()));
+//        System.out.println(" get node for download ");
+//        System.out.println(masterCommMonitorService
+//                .getNodeForDownload(
+//                        GetNodeForDownloadRequest
+//                        .newBuilder()
+//                        .setFilename("cars")
+//                        .build()));
+//        System.out.println(" get node for upload ");
+//        System.out.println(masterCommMonitorService
+//                .getNodeForUpload(GetNodeForUploadRequest
+//                        .newBuilder()
+//                        .setFilename("colours")
+//                        .build()));
+//        System.out.println(" node down update ");
+//        System.out.println(masterCommMonitorService
+//                .nodeDownUpdate(NodeDownUpdateRequest
+//                        .newBuilder()
+//                        .setNodeip("AWS")
+//                        .build()));
+//        System.out.println(" get node ips for replication");
+//        System.out.println(masterCommMonitorService.getNodeIpsForReplication(NodeIpsRequest.newBuilder().setFilename("cars").build()));
+//        System.out.println(" update replication status ");
+//        System.out.println(masterCommMonitorService.updateReplicationStatus(ReplicationDetailsRequest.newBuilder().setFilename("cars").addAllNodeips(Arrays.asList("Audi", "Polo")).build()));
+//        System.out.println(masterCommMonitorService.getNodeIpsForReplication(NodeIpsRequest.newBuilder().setFilename("cars").build()));
+//        System.out.println(" get list of all files ");
+//        System.out.println(masterCommMonitorService.getListOfFiles(GetListOfFilesRequest.newBuilder().addAllNodeips(Arrays.asList("BMW")).build()));
     }
 }
