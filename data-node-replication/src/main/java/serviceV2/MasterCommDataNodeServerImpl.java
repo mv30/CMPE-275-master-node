@@ -112,16 +112,16 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
 
     @Override
     public void getNodeForUpload(GetNodeForUploadRequest request, StreamObserver<GetNodeForUploadResponse> responseObserver) {
-        List<String> nodeIps = new ArrayList<>();
+        List<String> values = new ArrayList<>();
         try {
-            nodeIps = activeNodesFileHandler.getFileContent().stream().map(DataEntry::getKey).collect(Collectors.toList());
+            values = activeNodesFileHandler.getFileContent().stream().map(DataEntry::getKey).collect(Collectors.toList());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        Collections.shuffle(nodeIps);
+        Collections.shuffle(values);
         String nodeIp = "";
-        if(!nodeIp.isEmpty()) {
-            nodeIp = nodeIps.get(0);
+        if(!values.isEmpty()) {
+            nodeIp = values.get(0);
         }
         responseObserver.onNext(GetNodeForUploadResponse.newBuilder().setNodeip(nodeIp).build());
         responseObserver.onCompleted();
