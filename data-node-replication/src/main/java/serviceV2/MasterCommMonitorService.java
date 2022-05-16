@@ -218,7 +218,7 @@ public class MasterCommMonitorService {
         masterCommMonitorService.setData(DataPayload
                 .newBuilder()
                 .setKey("trucks")
-                .addAllValues(Arrays.asList("Tahoe", "GMD", "Mahindra")).build());
+                .addAllValues(Arrays.asList("Tahoe", "GMD", "Mahindra", "BMW")).build());
         masterCommMonitorService.setData(DataPayload
                 .newBuilder()
                 .setKey("bikes")
@@ -276,5 +276,12 @@ public class MasterCommMonitorService {
                         .newBuilder()
                         .setNodeip("AWS")
                         .build()));
+        System.out.println(" get node ips for replication");
+        System.out.println(masterCommMonitorService.getNodeIpsForReplication(NodeIpsRequest.newBuilder().setFilename("cars").build()));
+        System.out.println(" update replication status ");
+        System.out.println(masterCommMonitorService.updateReplicationStatus(ReplicationDetailsRequest.newBuilder().setFilename("cars").addAllNodeips(Arrays.asList("Audi", "Polo")).build()));
+        System.out.println(masterCommMonitorService.getNodeIpsForReplication(NodeIpsRequest.newBuilder().setFilename("cars").build()));
+        System.out.println(" get list of all files ");
+        System.out.println(masterCommMonitorService.getListOfFiles(GetListOfFilesRequest.newBuilder().addAllNodeips(Arrays.asList("BMW")).build()));
     }
 }
