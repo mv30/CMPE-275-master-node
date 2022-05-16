@@ -19,9 +19,11 @@ public class MasterCommDataNodeServer {
 
     private String activeNodeFilePath;
 
+    private MasterCommMonitorService masterCommMonitorService;
+
     public MasterCommDataNodeServer( Integer hostServerId) {
         this.hostServerId = hostServerId;
-        MasterCommMonitorService masterCommMonitorService = new MasterCommMonitorService(this.hostServerId);
+        this.masterCommMonitorService = new MasterCommMonitorService(this.hostServerId);
         this.hostName = masterCommMonitorService.getPeers().get(hostServerId).getHostName();
         this.portNo = masterCommMonitorService.getPeers().get(hostServerId).getPortNo();
         this.keyValueFilePath = masterCommMonitorService.getPeers().get(hostServerId).getKeyValueFilePath();
@@ -34,6 +36,7 @@ public class MasterCommDataNodeServer {
                 .addService(new MasterCommDataNodeServerImpl( this.keyValueFilePath, this.activeNodeFilePath))
                 .build();
         server.start();
+        new MasterCommFaultToleranceService(hostServerId, this.masterCommMonitorService).start();
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
