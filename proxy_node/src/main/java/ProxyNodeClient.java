@@ -81,9 +81,9 @@ public class ProxyNodeClient {
         client.getNodeForUpload("file3.txt", 1234);
 
         System.out.println("UPDATE REPLICATION STATUS");
-        client.updateNodeReplicationStatus("file1.txt", Arrays.asList( "168.212. 226.204", "168.212. 226.205"));
-        client.updateNodeReplicationStatus("file2.txt", Arrays.asList( "168.212. 226.205", "168.212. 226.206"));
-        client.updateNodeReplicationStatus("file3.txt", Arrays.asList( "168.212. 226.206", "168.212. 226.207"));
+        client.updateNodeReplicationStatus("file1.txt", Arrays.asList( "168.212.226.204", "168.212.226.205"));
+        client.updateNodeReplicationStatus("file2.txt", Arrays.asList( "168.212.226.205", "168.212.226.206"));
+        client.updateNodeReplicationStatus("file3.txt", Arrays.asList( "168.212.226.206", "168.212.226.207"));
 
         System.out.println("NODE FOR FILE DOWNLOAD");
         client.getNodeForDownload("file1.txt");
@@ -91,7 +91,7 @@ public class ProxyNodeClient {
         client.getNodeForDownload("file3.txt");
 
         System.out.println("NODE DOWN UPDATE");
-        client.getNodeDownUpdate("168.212. 226.204");
+        client.getNodeDownUpdate("168.212.226.204");
 
         System.out.println("NODES FILE REPLICATED TO");
         client.getNodeIpsForReplication("file1.txt");
@@ -99,6 +99,6 @@ public class ProxyNodeClient {
         client.getNodeIpsForReplication("file3.txt");
 
         System.out.println("LIST OF FILES");
-        client.getListOfFiles(new String[]{"168.212. 226.204", "168.212. 226.205", "168.212. 226.206", "168.212. 226.207"});
+        client.getListOfFiles(new String[]{"168.212.226.204", "168.212.226.205", "168.212.226.206", "168.212.226.207"});
     }
 }
