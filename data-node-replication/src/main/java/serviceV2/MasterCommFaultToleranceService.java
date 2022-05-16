@@ -28,7 +28,7 @@ public class MasterCommFaultToleranceService extends Thread{
             return;
         }
         for(Integer faultServerId: faultyServerIds) {
-            System.out.println(String.format(" found serverId: %s faulty ", faultServerId));
+            System.out.println(String.format(" found & removed serverId: %s faulty from group of %s", faultServerId, hostServerId));
             masterCommMonitorService.removePeer(faultServerId);
         }
         List<DataEntry> dataEntryList = keyValueFileHandler.getFileContent();
