@@ -15,6 +15,130 @@ public final class ReplicationGrpc {
   public static final String SERVICE_NAME = "stream.Replication";
 
   // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<org.master.protos.DataPayload,
+      org.master.protos.DataPayload> getHealthPollMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "healthPoll",
+      requestType = org.master.protos.DataPayload.class,
+      responseType = org.master.protos.DataPayload.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<org.master.protos.DataPayload,
+      org.master.protos.DataPayload> getHealthPollMethod() {
+    io.grpc.MethodDescriptor<org.master.protos.DataPayload, org.master.protos.DataPayload> getHealthPollMethod;
+    if ((getHealthPollMethod = ReplicationGrpc.getHealthPollMethod) == null) {
+      synchronized (ReplicationGrpc.class) {
+        if ((getHealthPollMethod = ReplicationGrpc.getHealthPollMethod) == null) {
+          ReplicationGrpc.getHealthPollMethod = getHealthPollMethod =
+              io.grpc.MethodDescriptor.<org.master.protos.DataPayload, org.master.protos.DataPayload>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "healthPoll"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.master.protos.DataPayload.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.master.protos.DataPayload.getDefaultInstance()))
+              .setSchemaDescriptor(new ReplicationMethodDescriptorSupplier("healthPoll"))
+              .build();
+        }
+      }
+    }
+    return getHealthPollMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<org.master.protos.DataPayload,
+      org.master.protos.DataPayload> getSetDataMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "setData",
+      requestType = org.master.protos.DataPayload.class,
+      responseType = org.master.protos.DataPayload.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<org.master.protos.DataPayload,
+      org.master.protos.DataPayload> getSetDataMethod() {
+    io.grpc.MethodDescriptor<org.master.protos.DataPayload, org.master.protos.DataPayload> getSetDataMethod;
+    if ((getSetDataMethod = ReplicationGrpc.getSetDataMethod) == null) {
+      synchronized (ReplicationGrpc.class) {
+        if ((getSetDataMethod = ReplicationGrpc.getSetDataMethod) == null) {
+          ReplicationGrpc.getSetDataMethod = getSetDataMethod =
+              io.grpc.MethodDescriptor.<org.master.protos.DataPayload, org.master.protos.DataPayload>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "setData"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.master.protos.DataPayload.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.master.protos.DataPayload.getDefaultInstance()))
+              .setSchemaDescriptor(new ReplicationMethodDescriptorSupplier("setData"))
+              .build();
+        }
+      }
+    }
+    return getSetDataMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<org.master.protos.DataPayload,
+      org.master.protos.DataPayload> getGetDataMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getData",
+      requestType = org.master.protos.DataPayload.class,
+      responseType = org.master.protos.DataPayload.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<org.master.protos.DataPayload,
+      org.master.protos.DataPayload> getGetDataMethod() {
+    io.grpc.MethodDescriptor<org.master.protos.DataPayload, org.master.protos.DataPayload> getGetDataMethod;
+    if ((getGetDataMethod = ReplicationGrpc.getGetDataMethod) == null) {
+      synchronized (ReplicationGrpc.class) {
+        if ((getGetDataMethod = ReplicationGrpc.getGetDataMethod) == null) {
+          ReplicationGrpc.getGetDataMethod = getGetDataMethod =
+              io.grpc.MethodDescriptor.<org.master.protos.DataPayload, org.master.protos.DataPayload>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getData"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.master.protos.DataPayload.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.master.protos.DataPayload.getDefaultInstance()))
+              .setSchemaDescriptor(new ReplicationMethodDescriptorSupplier("getData"))
+              .build();
+        }
+      }
+    }
+    return getGetDataMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<org.master.protos.DataPayload,
+      org.master.protos.DataPayload> getRemoveDataMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "removeData",
+      requestType = org.master.protos.DataPayload.class,
+      responseType = org.master.protos.DataPayload.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<org.master.protos.DataPayload,
+      org.master.protos.DataPayload> getRemoveDataMethod() {
+    io.grpc.MethodDescriptor<org.master.protos.DataPayload, org.master.protos.DataPayload> getRemoveDataMethod;
+    if ((getRemoveDataMethod = ReplicationGrpc.getRemoveDataMethod) == null) {
+      synchronized (ReplicationGrpc.class) {
+        if ((getRemoveDataMethod = ReplicationGrpc.getRemoveDataMethod) == null) {
+          ReplicationGrpc.getRemoveDataMethod = getRemoveDataMethod =
+              io.grpc.MethodDescriptor.<org.master.protos.DataPayload, org.master.protos.DataPayload>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "removeData"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.master.protos.DataPayload.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.master.protos.DataPayload.getDefaultInstance()))
+              .setSchemaDescriptor(new ReplicationMethodDescriptorSupplier("removeData"))
+              .build();
+        }
+      }
+    }
+    return getRemoveDataMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<org.master.protos.NewNodeUpdateRequest,
       org.master.protos.StatusResponse> getNewNodeUpdateMethod;
 
@@ -282,6 +406,37 @@ public final class ReplicationGrpc {
 
     /**
      * <pre>
+     * Methods internal to data node operation
+     * </pre>
+     */
+    public void healthPoll(org.master.protos.DataPayload request,
+        io.grpc.stub.StreamObserver<org.master.protos.DataPayload> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getHealthPollMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void setData(org.master.protos.DataPayload request,
+        io.grpc.stub.StreamObserver<org.master.protos.DataPayload> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetDataMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getData(org.master.protos.DataPayload request,
+        io.grpc.stub.StreamObserver<org.master.protos.DataPayload> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetDataMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void removeData(org.master.protos.DataPayload request,
+        io.grpc.stub.StreamObserver<org.master.protos.DataPayload> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRemoveDataMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * Methods required for Gateway
      * </pre>
      */
@@ -343,6 +498,34 @@ public final class ReplicationGrpc {
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+          .addMethod(
+            getHealthPollMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                org.master.protos.DataPayload,
+                org.master.protos.DataPayload>(
+                  this, METHODID_HEALTH_POLL)))
+          .addMethod(
+            getSetDataMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                org.master.protos.DataPayload,
+                org.master.protos.DataPayload>(
+                  this, METHODID_SET_DATA)))
+          .addMethod(
+            getGetDataMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                org.master.protos.DataPayload,
+                org.master.protos.DataPayload>(
+                  this, METHODID_GET_DATA)))
+          .addMethod(
+            getRemoveDataMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                org.master.protos.DataPayload,
+                org.master.protos.DataPayload>(
+                  this, METHODID_REMOVE_DATA)))
           .addMethod(
             getNewNodeUpdateMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -408,6 +591,41 @@ public final class ReplicationGrpc {
     protected ReplicationStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new ReplicationStub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     * Methods internal to data node operation
+     * </pre>
+     */
+    public void healthPoll(org.master.protos.DataPayload request,
+        io.grpc.stub.StreamObserver<org.master.protos.DataPayload> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getHealthPollMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void setData(org.master.protos.DataPayload request,
+        io.grpc.stub.StreamObserver<org.master.protos.DataPayload> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getSetDataMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getData(org.master.protos.DataPayload request,
+        io.grpc.stub.StreamObserver<org.master.protos.DataPayload> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetDataMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void removeData(org.master.protos.DataPayload request,
+        io.grpc.stub.StreamObserver<org.master.protos.DataPayload> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getRemoveDataMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -495,6 +713,37 @@ public final class ReplicationGrpc {
 
     /**
      * <pre>
+     * Methods internal to data node operation
+     * </pre>
+     */
+    public org.master.protos.DataPayload healthPoll(org.master.protos.DataPayload request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getHealthPollMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public org.master.protos.DataPayload setData(org.master.protos.DataPayload request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSetDataMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public org.master.protos.DataPayload getData(org.master.protos.DataPayload request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetDataMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public org.master.protos.DataPayload removeData(org.master.protos.DataPayload request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRemoveDataMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      * Methods required for Gateway
      * </pre>
      */
@@ -571,6 +820,41 @@ public final class ReplicationGrpc {
 
     /**
      * <pre>
+     * Methods internal to data node operation
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<org.master.protos.DataPayload> healthPoll(
+        org.master.protos.DataPayload request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getHealthPollMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<org.master.protos.DataPayload> setData(
+        org.master.protos.DataPayload request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getSetDataMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<org.master.protos.DataPayload> getData(
+        org.master.protos.DataPayload request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetDataMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<org.master.protos.DataPayload> removeData(
+        org.master.protos.DataPayload request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getRemoveDataMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * Methods required for Gateway
      * </pre>
      */
@@ -638,13 +922,17 @@ public final class ReplicationGrpc {
     }
   }
 
-  private static final int METHODID_NEW_NODE_UPDATE = 0;
-  private static final int METHODID_GET_NODE_FOR_DOWNLOAD = 1;
-  private static final int METHODID_GET_NODE_FOR_UPLOAD = 2;
-  private static final int METHODID_NODE_DOWN_UPDATE = 3;
-  private static final int METHODID_GET_NODE_IPS_FOR_REPLICATION = 4;
-  private static final int METHODID_UPDATE_REPLICATION_STATUS = 5;
-  private static final int METHODID_GET_LIST_OF_FILES = 6;
+  private static final int METHODID_HEALTH_POLL = 0;
+  private static final int METHODID_SET_DATA = 1;
+  private static final int METHODID_GET_DATA = 2;
+  private static final int METHODID_REMOVE_DATA = 3;
+  private static final int METHODID_NEW_NODE_UPDATE = 4;
+  private static final int METHODID_GET_NODE_FOR_DOWNLOAD = 5;
+  private static final int METHODID_GET_NODE_FOR_UPLOAD = 6;
+  private static final int METHODID_NODE_DOWN_UPDATE = 7;
+  private static final int METHODID_GET_NODE_IPS_FOR_REPLICATION = 8;
+  private static final int METHODID_UPDATE_REPLICATION_STATUS = 9;
+  private static final int METHODID_GET_LIST_OF_FILES = 10;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -663,6 +951,22 @@ public final class ReplicationGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_HEALTH_POLL:
+          serviceImpl.healthPoll((org.master.protos.DataPayload) request,
+              (io.grpc.stub.StreamObserver<org.master.protos.DataPayload>) responseObserver);
+          break;
+        case METHODID_SET_DATA:
+          serviceImpl.setData((org.master.protos.DataPayload) request,
+              (io.grpc.stub.StreamObserver<org.master.protos.DataPayload>) responseObserver);
+          break;
+        case METHODID_GET_DATA:
+          serviceImpl.getData((org.master.protos.DataPayload) request,
+              (io.grpc.stub.StreamObserver<org.master.protos.DataPayload>) responseObserver);
+          break;
+        case METHODID_REMOVE_DATA:
+          serviceImpl.removeData((org.master.protos.DataPayload) request,
+              (io.grpc.stub.StreamObserver<org.master.protos.DataPayload>) responseObserver);
+          break;
         case METHODID_NEW_NODE_UPDATE:
           serviceImpl.newNodeUpdate((org.master.protos.NewNodeUpdateRequest) request,
               (io.grpc.stub.StreamObserver<org.master.protos.StatusResponse>) responseObserver);
@@ -713,7 +1017,7 @@ public final class ReplicationGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return org.master.protos.MasterComm.getDescriptor();
+      return org.master.protos.MasterCommDataNode.getDescriptor();
     }
 
     @java.lang.Override
@@ -752,6 +1056,10 @@ public final class ReplicationGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ReplicationFileDescriptorSupplier())
+              .addMethod(getHealthPollMethod())
+              .addMethod(getSetDataMethod())
+              .addMethod(getGetDataMethod())
+              .addMethod(getRemoveDataMethod())
               .addMethod(getNewNodeUpdateMethod())
               .addMethod(getGetNodeForDownloadMethod())
               .addMethod(getGetNodeForUploadMethod())

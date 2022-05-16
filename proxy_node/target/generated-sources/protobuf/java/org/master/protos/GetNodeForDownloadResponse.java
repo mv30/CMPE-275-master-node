@@ -76,13 +76,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return org.master.protos.MasterComm.internal_static_stream_GetNodeForDownloadResponse_descriptor;
+    return org.master.protos.MasterCommDataNode.internal_static_stream_GetNodeForDownloadResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return org.master.protos.MasterComm.internal_static_stream_GetNodeForDownloadResponse_fieldAccessorTable
+    return org.master.protos.MasterCommDataNode.internal_static_stream_GetNodeForDownloadResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             org.master.protos.GetNodeForDownloadResponse.class, org.master.protos.GetNodeForDownloadResponse.Builder.class);
   }
@@ -288,13 +288,13 @@ private static final long serialVersionUID = 0L;
       org.master.protos.GetNodeForDownloadResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.master.protos.MasterComm.internal_static_stream_GetNodeForDownloadResponse_descriptor;
+      return org.master.protos.MasterCommDataNode.internal_static_stream_GetNodeForDownloadResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.master.protos.MasterComm.internal_static_stream_GetNodeForDownloadResponse_fieldAccessorTable
+      return org.master.protos.MasterCommDataNode.internal_static_stream_GetNodeForDownloadResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.master.protos.GetNodeForDownloadResponse.class, org.master.protos.GetNodeForDownloadResponse.Builder.class);
     }
@@ -325,7 +325,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return org.master.protos.MasterComm.internal_static_stream_GetNodeForDownloadResponse_descriptor;
+      return org.master.protos.MasterCommDataNode.internal_static_stream_GetNodeForDownloadResponse_descriptor;
     }
 
     @java.lang.Override

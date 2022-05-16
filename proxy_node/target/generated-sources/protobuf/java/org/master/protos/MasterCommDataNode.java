@@ -3,8 +3,8 @@
 
 package org.master.protos;
 
-public final class MasterComm {
-  private MasterComm() {}
+public final class MasterCommDataNode {
+  private MasterCommDataNode() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -79,6 +79,11 @@ public final class MasterComm {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_stream_GetListOfFilesResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stream_DataPayload_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stream_DataPayload_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -104,23 +109,31 @@ public final class MasterComm {
       "odeDownUpdateRequest\022\016\n\006nodeip\030\001 \001(\t\"(\n\025" +
       "GetListOfFilesRequest\022\017\n\007nodeips\030\001 \003(\t\"+" +
       "\n\026GetListOfFilesResponse\022\021\n\tfilenames\030\001 " +
-      "\003(\t*\"\n\006Status\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE\020\0012" +
-      "\334\004\n\013Replication\022G\n\rNewNodeUpdate\022\034.strea" +
-      "m.NewNodeUpdateRequest\032\026.stream.StatusRe" +
-      "sponse\"\000\022]\n\022GetNodeForDownload\022!.stream." +
-      "GetNodeForDownloadRequest\032\".stream.GetNo" +
-      "deForDownloadResponse\"\000\022W\n\020GetNodeForUpl" +
-      "oad\022\037.stream.GetNodeForUploadRequest\032 .s" +
-      "tream.GetNodeForUploadResponse\"\000\022I\n\016Node" +
-      "DownUpdate\022\035.stream.NodeDownUpdateReques" +
-      "t\032\026.stream.StatusResponse\"\000\022J\n\030GetNodeIp" +
-      "sForReplication\022\026.stream.NodeIpsRequest\032" +
-      "\024.stream.NodeIpsReply\"\000\022b\n\027UpdateReplica" +
-      "tionStatus\022!.stream.ReplicationDetailsRe" +
-      "quest\032\".stream.ReplicationDetailsRespons" +
-      "e\"\000\022Q\n\016GetListOfFiles\022\035.stream.GetListOf" +
-      "FilesRequest\032\036.stream.GetListOfFilesResp" +
-      "onse\"\000B\025\n\021org.master.protosP\001b\006proto3"
+      "\003(\t\"*\n\013DataPayload\022\013\n\003key\030\001 \001(\t\022\016\n\006value" +
+      "s\030\002 \003(\t*\"\n\006Status\022\013\n\007SUCCESS\020\000\022\013\n\007FAILUR" +
+      "E\020\0012\276\006\n\013Replication\0228\n\nhealthPoll\022\023.stre" +
+      "am.DataPayload\032\023.stream.DataPayload\"\000\0225\n" +
+      "\007setData\022\023.stream.DataPayload\032\023.stream.D" +
+      "ataPayload\"\000\0225\n\007getData\022\023.stream.DataPay" +
+      "load\032\023.stream.DataPayload\"\000\0228\n\nremoveDat" +
+      "a\022\023.stream.DataPayload\032\023.stream.DataPayl" +
+      "oad\"\000\022G\n\rNewNodeUpdate\022\034.stream.NewNodeU" +
+      "pdateRequest\032\026.stream.StatusResponse\"\000\022]" +
+      "\n\022GetNodeForDownload\022!.stream.GetNodeFor" +
+      "DownloadRequest\032\".stream.GetNodeForDownl" +
+      "oadResponse\"\000\022W\n\020GetNodeForUpload\022\037.stre" +
+      "am.GetNodeForUploadRequest\032 .stream.GetN" +
+      "odeForUploadResponse\"\000\022I\n\016NodeDownUpdate" +
+      "\022\035.stream.NodeDownUpdateRequest\032\026.stream" +
+      ".StatusResponse\"\000\022J\n\030GetNodeIpsForReplic" +
+      "ation\022\026.stream.NodeIpsRequest\032\024.stream.N" +
+      "odeIpsReply\"\000\022b\n\027UpdateReplicationStatus" +
+      "\022!.stream.ReplicationDetailsRequest\032\".st" +
+      "ream.ReplicationDetailsResponse\"\000\022Q\n\016Get" +
+      "ListOfFiles\022\035.stream.GetListOfFilesReque" +
+      "st\032\036.stream.GetListOfFilesResponse\"\000B/\n\021" +
+      "org.master.protosB\022MasterCommDataNodeP\001\242" +
+      "\002\003HLWb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -204,6 +217,12 @@ public final class MasterComm {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stream_GetListOfFilesResponse_descriptor,
         new java.lang.String[] { "Filenames", });
+    internal_static_stream_DataPayload_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_stream_DataPayload_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stream_DataPayload_descriptor,
+        new java.lang.String[] { "Key", "Values", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

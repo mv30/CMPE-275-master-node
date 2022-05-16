@@ -80,13 +80,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return org.master.protos.MasterComm.internal_static_stream_StatusResponse_descriptor;
+    return org.master.protos.MasterCommDataNode.internal_static_stream_StatusResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return org.master.protos.MasterComm.internal_static_stream_StatusResponse_fieldAccessorTable
+    return org.master.protos.MasterCommDataNode.internal_static_stream_StatusResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             org.master.protos.StatusResponse.class, org.master.protos.StatusResponse.Builder.class);
   }
@@ -277,13 +277,13 @@ private static final long serialVersionUID = 0L;
       org.master.protos.StatusResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.master.protos.MasterComm.internal_static_stream_StatusResponse_descriptor;
+      return org.master.protos.MasterCommDataNode.internal_static_stream_StatusResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.master.protos.MasterComm.internal_static_stream_StatusResponse_fieldAccessorTable
+      return org.master.protos.MasterCommDataNode.internal_static_stream_StatusResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.master.protos.StatusResponse.class, org.master.protos.StatusResponse.Builder.class);
     }
@@ -314,7 +314,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return org.master.protos.MasterComm.internal_static_stream_StatusResponse_descriptor;
+      return org.master.protos.MasterCommDataNode.internal_static_stream_StatusResponse_descriptor;
     }
 
     @java.lang.Override

@@ -2,11 +2,19 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "org.master.protos";
-//option java_outer_classname = "StreamProto";
+option java_outer_classname = "MasterCommDataNode";
+option objc_class_prefix = "HLW";
 
 package stream;
 
 service Replication {
+
+  // Methods internal to data node operation
+  rpc healthPoll(DataPayload) returns (DataPayload) {}
+  rpc setData(DataPayload) returns (DataPayload) {}
+  rpc getData(DataPayload) returns (DataPayload) {}
+  rpc removeData(DataPayload) returns (DataPayload) {}
+
   // Methods required for Gateway
   rpc NewNodeUpdate(NewNodeUpdateRequest) returns (StatusResponse) {}
   rpc GetNodeForDownload(GetNodeForDownloadRequest) returns (GetNodeForDownloadResponse) {}
@@ -88,4 +96,9 @@ message GetListOfFilesRequest {
 
 message GetListOfFilesResponse {
   repeated string filenames = 1;
+}
+
+message DataPayload {
+  string key = 1;
+  repeated string values = 2;
 }

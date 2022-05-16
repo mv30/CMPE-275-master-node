@@ -1,5 +1,7 @@
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import service.MasterCommMonitorService;
+import service.ProxyMasterFaultToleranceService;
 import service.ReplicationService;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -10,7 +12,9 @@ public class ProxyNodeServer {
 
     private void start() throws IOException {
         int port = 6090;
-        server = ServerBuilder.forPort(port).addService( new ReplicationService()).build().start();
+        MasterCommMonitorService masterCommMonitorService = new MasterCommMonitorService(-1);
+        server = ServerBuilder.forPort(port).addService( new ReplicationService(masterCommMonitorService)).build().start();
+        new ProxyMasterFaultToleranceService(masterCommMonitorService).start();
 
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override

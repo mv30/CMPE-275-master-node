@@ -83,13 +83,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return org.master.protos.MasterComm.internal_static_stream_GetListOfFilesResponse_descriptor;
+    return org.master.protos.MasterCommDataNode.internal_static_stream_GetListOfFilesResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return org.master.protos.MasterComm.internal_static_stream_GetListOfFilesResponse_fieldAccessorTable
+    return org.master.protos.MasterCommDataNode.internal_static_stream_GetListOfFilesResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             org.master.protos.GetListOfFilesResponse.class, org.master.protos.GetListOfFilesResponse.Builder.class);
   }
@@ -299,13 +299,13 @@ private static final long serialVersionUID = 0L;
       org.master.protos.GetListOfFilesResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.master.protos.MasterComm.internal_static_stream_GetListOfFilesResponse_descriptor;
+      return org.master.protos.MasterCommDataNode.internal_static_stream_GetListOfFilesResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.master.protos.MasterComm.internal_static_stream_GetListOfFilesResponse_fieldAccessorTable
+      return org.master.protos.MasterCommDataNode.internal_static_stream_GetListOfFilesResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.master.protos.GetListOfFilesResponse.class, org.master.protos.GetListOfFilesResponse.Builder.class);
     }
@@ -336,7 +336,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return org.master.protos.MasterComm.internal_static_stream_GetListOfFilesResponse_descriptor;
+      return org.master.protos.MasterCommDataNode.internal_static_stream_GetListOfFilesResponse_descriptor;
     }
 
     @java.lang.Override
