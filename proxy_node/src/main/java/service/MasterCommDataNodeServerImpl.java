@@ -2,7 +2,6 @@ package service;
 
 import io.grpc.stub.StreamObserver;
 import org.master.protos.*;
-import service.DataEntry;
 import service.FileHandler;
 
 import java.io.File;
@@ -27,8 +26,8 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
     }
 
     /*
-     *   Methods specific to Data Node
-     * */
+    *   Methods specific to Data Node
+    * */
     @Override
     public void healthPoll(DataPayload request, StreamObserver<DataPayload> responseObserver) {
         responseObserver.onNext(DataPayload.newBuilder().build());
@@ -79,8 +78,8 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
     }
 
     /*
-     *   Methods specific to Gateway
-     * */
+    *   Methods specific to Gateway
+    * */
     @Override
     public void newNodeUpdate(NewNodeUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
         String key = request.getNewnodeip();
@@ -129,8 +128,8 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
     }
 
     /*
-     *       Methods for Sentinel
-     * */
+    *       Methods for Sentinel
+    * */
     @Override
     public void nodeDownUpdate(NodeDownUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
         List<DataEntry> dataEntryList = new ArrayList<>();
@@ -153,6 +152,18 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
             throw new RuntimeException(e);
         }
         responseObserver.onNext(StatusResponse.newBuilder().setStatus(Status.SUCCESS).build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getListOfNodes(GetListOfNodesRequest request, StreamObserver<GetListOfNodesResponse> responseObserver) {
+        List<String> values = new ArrayList<>();
+        try {
+            values = activeNodesFileHandler.getFileContent().stream().map(DataEntry::getKey).collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        responseObserver.onNext(GetListOfNodesResponse.newBuilder().addAllNodeips(values).build());
         responseObserver.onCompleted();
     }
 
@@ -192,8 +203,8 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
     }
 
     /*
-     *   Methods for CLI
-     * */
+    *   Methods for CLI
+    * */
 
     @Override
     public void getListOfFiles(GetListOfFilesRequest request, StreamObserver<GetListOfFilesResponse> responseObserver) {

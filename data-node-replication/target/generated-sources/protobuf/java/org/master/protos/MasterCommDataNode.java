@@ -80,6 +80,16 @@ public final class MasterCommDataNode {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_stream_GetListOfFilesResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stream_GetListOfNodesRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stream_GetListOfNodesRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stream_GetListOfNodesResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stream_GetListOfNodesResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_stream_DataPayload_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -109,31 +119,35 @@ public final class MasterCommDataNode {
       "odeDownUpdateRequest\022\016\n\006nodeip\030\001 \001(\t\"(\n\025" +
       "GetListOfFilesRequest\022\017\n\007nodeips\030\001 \003(\t\"+" +
       "\n\026GetListOfFilesResponse\022\021\n\tfilenames\030\001 " +
-      "\003(\t\"*\n\013DataPayload\022\013\n\003key\030\001 \001(\t\022\016\n\006value" +
-      "s\030\002 \003(\t*\"\n\006Status\022\013\n\007SUCCESS\020\000\022\013\n\007FAILUR" +
-      "E\020\0012\276\006\n\013Replication\0228\n\nhealthPoll\022\023.stre" +
-      "am.DataPayload\032\023.stream.DataPayload\"\000\0225\n" +
-      "\007setData\022\023.stream.DataPayload\032\023.stream.D" +
-      "ataPayload\"\000\0225\n\007getData\022\023.stream.DataPay" +
-      "load\032\023.stream.DataPayload\"\000\0228\n\nremoveDat" +
-      "a\022\023.stream.DataPayload\032\023.stream.DataPayl" +
-      "oad\"\000\022G\n\rNewNodeUpdate\022\034.stream.NewNodeU" +
-      "pdateRequest\032\026.stream.StatusResponse\"\000\022]" +
-      "\n\022GetNodeForDownload\022!.stream.GetNodeFor" +
-      "DownloadRequest\032\".stream.GetNodeForDownl" +
-      "oadResponse\"\000\022W\n\020GetNodeForUpload\022\037.stre" +
-      "am.GetNodeForUploadRequest\032 .stream.GetN" +
-      "odeForUploadResponse\"\000\022I\n\016NodeDownUpdate" +
-      "\022\035.stream.NodeDownUpdateRequest\032\026.stream" +
-      ".StatusResponse\"\000\022J\n\030GetNodeIpsForReplic" +
-      "ation\022\026.stream.NodeIpsRequest\032\024.stream.N" +
-      "odeIpsReply\"\000\022b\n\027UpdateReplicationStatus" +
-      "\022!.stream.ReplicationDetailsRequest\032\".st" +
-      "ream.ReplicationDetailsResponse\"\000\022Q\n\016Get" +
-      "ListOfFiles\022\035.stream.GetListOfFilesReque" +
-      "st\032\036.stream.GetListOfFilesResponse\"\000B/\n\021" +
-      "org.master.protosB\022MasterCommDataNodeP\001\242" +
-      "\002\003HLWb\006proto3"
+      "\003(\t\"\027\n\025GetListOfNodesRequest\")\n\026GetListO" +
+      "fNodesResponse\022\017\n\007nodeips\030\001 \003(\t\"*\n\013DataP" +
+      "ayload\022\013\n\003key\030\001 \001(\t\022\016\n\006values\030\002 \003(\t*\"\n\006S" +
+      "tatus\022\013\n\007SUCCESS\020\000\022\013\n\007FAILURE\020\0012\221\007\n\013Repl" +
+      "ication\0228\n\nhealthPoll\022\023.stream.DataPaylo" +
+      "ad\032\023.stream.DataPayload\"\000\0225\n\007setData\022\023.s" +
+      "tream.DataPayload\032\023.stream.DataPayload\"\000" +
+      "\0225\n\007getData\022\023.stream.DataPayload\032\023.strea" +
+      "m.DataPayload\"\000\0228\n\nremoveData\022\023.stream.D" +
+      "ataPayload\032\023.stream.DataPayload\"\000\022G\n\rNew" +
+      "NodeUpdate\022\034.stream.NewNodeUpdateRequest" +
+      "\032\026.stream.StatusResponse\"\000\022]\n\022GetNodeFor" +
+      "Download\022!.stream.GetNodeForDownloadRequ" +
+      "est\032\".stream.GetNodeForDownloadResponse\"" +
+      "\000\022W\n\020GetNodeForUpload\022\037.stream.GetNodeFo" +
+      "rUploadRequest\032 .stream.GetNodeForUpload" +
+      "Response\"\000\022I\n\016NodeDownUpdate\022\035.stream.No" +
+      "deDownUpdateRequest\032\026.stream.StatusRespo" +
+      "nse\"\000\022Q\n\016GetListOfNodes\022\035.stream.GetList" +
+      "OfNodesRequest\032\036.stream.GetListOfNodesRe" +
+      "sponse\"\000\022J\n\030GetNodeIpsForReplication\022\026.s" +
+      "tream.NodeIpsRequest\032\024.stream.NodeIpsRep" +
+      "ly\"\000\022b\n\027UpdateReplicationStatus\022!.stream" +
+      ".ReplicationDetailsRequest\032\".stream.Repl" +
+      "icationDetailsResponse\"\000\022Q\n\016GetListOfFil" +
+      "es\022\035.stream.GetListOfFilesRequest\032\036.stre" +
+      "am.GetListOfFilesResponse\"\000B/\n\021org.maste" +
+      "r.protosB\022MasterCommDataNodeP\001\242\002\003HLWb\006pr" +
+      "oto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -217,8 +231,20 @@ public final class MasterCommDataNode {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stream_GetListOfFilesResponse_descriptor,
         new java.lang.String[] { "Filenames", });
-    internal_static_stream_DataPayload_descriptor =
+    internal_static_stream_GetListOfNodesRequest_descriptor =
       getDescriptor().getMessageTypes().get(13);
+    internal_static_stream_GetListOfNodesRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stream_GetListOfNodesRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_stream_GetListOfNodesResponse_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_stream_GetListOfNodesResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stream_GetListOfNodesResponse_descriptor,
+        new java.lang.String[] { "Nodeips", });
+    internal_static_stream_DataPayload_descriptor =
+      getDescriptor().getMessageTypes().get(15);
     internal_static_stream_DataPayload_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stream_DataPayload_descriptor,

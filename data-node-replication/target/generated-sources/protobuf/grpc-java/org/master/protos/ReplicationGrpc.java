@@ -263,6 +263,37 @@ public final class ReplicationGrpc {
     return getNodeDownUpdateMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<org.master.protos.GetListOfNodesRequest,
+      org.master.protos.GetListOfNodesResponse> getGetListOfNodesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetListOfNodes",
+      requestType = org.master.protos.GetListOfNodesRequest.class,
+      responseType = org.master.protos.GetListOfNodesResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<org.master.protos.GetListOfNodesRequest,
+      org.master.protos.GetListOfNodesResponse> getGetListOfNodesMethod() {
+    io.grpc.MethodDescriptor<org.master.protos.GetListOfNodesRequest, org.master.protos.GetListOfNodesResponse> getGetListOfNodesMethod;
+    if ((getGetListOfNodesMethod = ReplicationGrpc.getGetListOfNodesMethod) == null) {
+      synchronized (ReplicationGrpc.class) {
+        if ((getGetListOfNodesMethod = ReplicationGrpc.getGetListOfNodesMethod) == null) {
+          ReplicationGrpc.getGetListOfNodesMethod = getGetListOfNodesMethod =
+              io.grpc.MethodDescriptor.<org.master.protos.GetListOfNodesRequest, org.master.protos.GetListOfNodesResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetListOfNodes"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.master.protos.GetListOfNodesRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  org.master.protos.GetListOfNodesResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ReplicationMethodDescriptorSupplier("GetListOfNodes"))
+              .build();
+        }
+      }
+    }
+    return getGetListOfNodesMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<org.master.protos.NodeIpsRequest,
       org.master.protos.NodeIpsReply> getGetNodeIpsForReplicationMethod;
 
@@ -470,6 +501,13 @@ public final class ReplicationGrpc {
     }
 
     /**
+     */
+    public void getListOfNodes(org.master.protos.GetListOfNodesRequest request,
+        io.grpc.stub.StreamObserver<org.master.protos.GetListOfNodesResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetListOfNodesMethod(), responseObserver);
+    }
+
+    /**
      * <pre>
      * Methods required for Node
      * </pre>
@@ -554,6 +592,13 @@ public final class ReplicationGrpc {
                 org.master.protos.NodeDownUpdateRequest,
                 org.master.protos.StatusResponse>(
                   this, METHODID_NODE_DOWN_UPDATE)))
+          .addMethod(
+            getGetListOfNodesMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                org.master.protos.GetListOfNodesRequest,
+                org.master.protos.GetListOfNodesResponse>(
+                  this, METHODID_GET_LIST_OF_NODES)))
           .addMethod(
             getGetNodeIpsForReplicationMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -667,6 +712,14 @@ public final class ReplicationGrpc {
     }
 
     /**
+     */
+    public void getListOfNodes(org.master.protos.GetListOfNodesRequest request,
+        io.grpc.stub.StreamObserver<org.master.protos.GetListOfNodesResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetListOfNodesMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
      * <pre>
      * Methods required for Node
      * </pre>
@@ -774,6 +827,13 @@ public final class ReplicationGrpc {
     public org.master.protos.StatusResponse nodeDownUpdate(org.master.protos.NodeDownUpdateRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getNodeDownUpdateMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public org.master.protos.GetListOfNodesResponse getListOfNodes(org.master.protos.GetListOfNodesRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetListOfNodesMethod(), getCallOptions(), request);
     }
 
     /**
@@ -892,6 +952,14 @@ public final class ReplicationGrpc {
     }
 
     /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<org.master.protos.GetListOfNodesResponse> getListOfNodes(
+        org.master.protos.GetListOfNodesRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetListOfNodesMethod(), getCallOptions()), request);
+    }
+
+    /**
      * <pre>
      * Methods required for Node
      * </pre>
@@ -930,9 +998,10 @@ public final class ReplicationGrpc {
   private static final int METHODID_GET_NODE_FOR_DOWNLOAD = 5;
   private static final int METHODID_GET_NODE_FOR_UPLOAD = 6;
   private static final int METHODID_NODE_DOWN_UPDATE = 7;
-  private static final int METHODID_GET_NODE_IPS_FOR_REPLICATION = 8;
-  private static final int METHODID_UPDATE_REPLICATION_STATUS = 9;
-  private static final int METHODID_GET_LIST_OF_FILES = 10;
+  private static final int METHODID_GET_LIST_OF_NODES = 8;
+  private static final int METHODID_GET_NODE_IPS_FOR_REPLICATION = 9;
+  private static final int METHODID_UPDATE_REPLICATION_STATUS = 10;
+  private static final int METHODID_GET_LIST_OF_FILES = 11;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -982,6 +1051,10 @@ public final class ReplicationGrpc {
         case METHODID_NODE_DOWN_UPDATE:
           serviceImpl.nodeDownUpdate((org.master.protos.NodeDownUpdateRequest) request,
               (io.grpc.stub.StreamObserver<org.master.protos.StatusResponse>) responseObserver);
+          break;
+        case METHODID_GET_LIST_OF_NODES:
+          serviceImpl.getListOfNodes((org.master.protos.GetListOfNodesRequest) request,
+              (io.grpc.stub.StreamObserver<org.master.protos.GetListOfNodesResponse>) responseObserver);
           break;
         case METHODID_GET_NODE_IPS_FOR_REPLICATION:
           serviceImpl.getNodeIpsForReplication((org.master.protos.NodeIpsRequest) request,
@@ -1064,6 +1137,7 @@ public final class ReplicationGrpc {
               .addMethod(getGetNodeForDownloadMethod())
               .addMethod(getGetNodeForUploadMethod())
               .addMethod(getNodeDownUpdateMethod())
+              .addMethod(getGetListOfNodesMethod())
               .addMethod(getGetNodeIpsForReplicationMethod())
               .addMethod(getUpdateReplicationStatusMethod())
               .addMethod(getGetListOfFilesMethod())
