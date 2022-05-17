@@ -72,7 +72,7 @@ public class ProxyNodeClient {
         /*
         *   Testing
         * */
-        ProxyNodeClient client = new ProxyNodeClient( "localhost", 6090);
+        ProxyNodeClient client = new ProxyNodeClient( "ec2-3-134-115-89.us-east-2.compute.amazonaws.com", 6090);
 
         System.out.println("ADD NODE");
         client.addNewNode("168.212.226.204");
