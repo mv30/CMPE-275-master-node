@@ -60,6 +60,10 @@ public class MasterCommDataNodeClient {
         return StatusResponse.newBuilder().setStatus(Status.SUCCESS).build();
     }
 
+    public GetListOfNodesResponse getListOfNodes( GetListOfNodesRequest getListOfNodesRequest) {
+        return stub.getListOfNodes(getListOfNodesRequest);
+    }
+
     public NodeIpsReply getNodeIpsForReplication(NodeIpsRequest nodeIpsRequest) {
         return stub.getNodeIpsForReplication(nodeIpsRequest);
     }

@@ -39,6 +39,13 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
     }
 
     @Override
+    public void getListOfNodes(GetListOfNodesRequest request, StreamObserver<GetListOfNodesResponse> responseObserver) {
+        GetListOfNodesResponse response = monitorService.getListOfNodes(request);
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
     public void getNodeIpsForReplication(NodeIpsRequest request, StreamObserver<NodeIpsReply> responseObserver) {
         NodeIpsReply response = monitorService.getNodeIpsForReplication(request);
         responseObserver.onNext(response);

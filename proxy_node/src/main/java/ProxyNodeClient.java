@@ -63,11 +63,16 @@ public class ProxyNodeClient {
         System.out.println(response.getFilenamesList());
     }
 
+    public void getListOfNodes() {
+        GetListOfNodesResponse response = replicationBlockingStub.getListOfNodes(GetListOfNodesRequest.newBuilder().build());
+        System.out.println(response.getNodeipsList());
+    }
+
     public static void main(String[] args) {
         /*
         *   Testing
         * */
-        ProxyNodeClient client = new ProxyNodeClient( "localhost", 6090);
+        ProxyNodeClient client = new ProxyNodeClient( "ec2-3-134-115-89.us-east-2.compute.amazonaws.com", 6090);
 
         System.out.println("ADD NODE");
         client.addNewNode("168.212.226.204");
@@ -92,6 +97,9 @@ public class ProxyNodeClient {
 
         System.out.println("NODE DOWN UPDATE");
         client.getNodeDownUpdate("168.212.226.204");
+
+        System.out.println("LIST OF NODES");
+        client.getListOfNodes();
 
         System.out.println("NODES FILE REPLICATED TO");
         client.getNodeIpsForReplication("file1.txt");

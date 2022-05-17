@@ -155,6 +155,14 @@ public class MasterCommMonitorService {
         return StatusResponse.newBuilder().setStatus(Status.SUCCESS).build();
     }
 
+    public GetListOfNodesResponse getListOfNodes( GetListOfNodesRequest getListOfNodesRequest) {
+        List<Integer> activeDataNodeServerIds = new ArrayList<>(peers.keySet());
+        Collections.shuffle(activeDataNodeServerIds);
+        Integer dateNodeServerId = activeDataNodeServerIds.get(0);
+        IpDetailsEntry ipDetailsEntry = peers.get(dateNodeServerId);
+        return ipDetailsEntry.getMasterCommDataNodeClient().getListOfNodes(getListOfNodesRequest);
+    }
+
     public NodeIpsReply getNodeIpsForReplication(NodeIpsRequest nodeIpsRequest) {
         Integer replicationNode = hostServerId;
         try {

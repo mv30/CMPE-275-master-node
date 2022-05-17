@@ -155,6 +155,18 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void getListOfNodes(GetListOfNodesRequest request, StreamObserver<GetListOfNodesResponse> responseObserver) {
+        List<String> values = new ArrayList<>();
+        try {
+            values = activeNodesFileHandler.getFileContent().stream().map(DataEntry::getKey).collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        responseObserver.onNext(GetListOfNodesResponse.newBuilder().addAllNodeips(values).build());
+        responseObserver.onCompleted();
+    }
+
     /**
      *  Methods for Nodes
      * */
