@@ -2,6 +2,7 @@ package service;
 
 import io.grpc.stub.StreamObserver;
 import org.master.protos.*;
+import service.DataEntry;
 import service.FileHandler;
 
 import java.io.File;
@@ -26,8 +27,8 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
     }
 
     /*
-    *   Methods specific to Data Node
-    * */
+     *   Methods specific to Data Node
+     * */
     @Override
     public void healthPoll(DataPayload request, StreamObserver<DataPayload> responseObserver) {
         responseObserver.onNext(DataPayload.newBuilder().build());
@@ -78,8 +79,8 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
     }
 
     /*
-    *   Methods specific to Gateway
-    * */
+     *   Methods specific to Gateway
+     * */
     @Override
     public void newNodeUpdate(NewNodeUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
         String key = request.getNewnodeip();
@@ -102,26 +103,34 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
             throw new RuntimeException(e);
         }
         Collections.shuffle(values);
-        responseObserver.onNext(GetNodeForDownloadResponse.newBuilder().setNodeip(values.get(0)).build());
+        String nodeIp = "";
+        if(!values.isEmpty()) {
+            nodeIp = values.get(0);
+        }
+        responseObserver.onNext(GetNodeForDownloadResponse.newBuilder().setNodeip(nodeIp).build());
         responseObserver.onCompleted();
     }
 
     @Override
     public void getNodeForUpload(GetNodeForUploadRequest request, StreamObserver<GetNodeForUploadResponse> responseObserver) {
-        List<String> nodeIps = new ArrayList<>();
+        List<String> values = new ArrayList<>();
         try {
-            nodeIps = activeNodesFileHandler.getFileContent().stream().map(DataEntry::getKey).collect(Collectors.toList());
+            values = activeNodesFileHandler.getFileContent().stream().map(DataEntry::getKey).collect(Collectors.toList());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        Collections.shuffle(nodeIps);
-        responseObserver.onNext(GetNodeForUploadResponse.newBuilder().setNodeip(nodeIps.get(0)).build());
+        Collections.shuffle(values);
+        String nodeIp = "";
+        if(!values.isEmpty()) {
+            nodeIp = values.get(0);
+        }
+        responseObserver.onNext(GetNodeForUploadResponse.newBuilder().setNodeip(nodeIp).build());
         responseObserver.onCompleted();
     }
 
     /*
-    *       Methods for Sentinel
-    * */
+     *       Methods for Sentinel
+     * */
     @Override
     public void nodeDownUpdate(NodeDownUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
         List<DataEntry> dataEntryList = new ArrayList<>();
@@ -129,6 +138,17 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
         try {
             dataEntryList = activeNodesFileHandler.getFileContent().stream().filter( dataEntry -> !key.equals(dataEntry.getKey())).collect(Collectors.toList());
             activeNodesFileHandler.writeData(dataEntryList);
+            dataEntryList = keyValueFileHandler.getFileContent()
+                    .stream()
+                    .map(dataEntry -> {
+                        DataEntry newDateEntry = new DataEntry();
+                        newDateEntry.setKey(dataEntry.getKey());
+                        Set<String> values = new HashSet<>(dataEntry.getValues());
+                        values.remove(key);
+                        newDateEntry.setValues(new ArrayList<>(values));
+                        return newDateEntry;
+                    }).collect(Collectors.toList());
+            keyValueFileHandler.writeData(dataEntryList);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -172,8 +192,8 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
     }
 
     /*
-    *   Methods for CLI
-    * */
+     *   Methods for CLI
+     * */
 
     @Override
     public void getListOfFiles(GetListOfFilesRequest request, StreamObserver<GetListOfFilesResponse> responseObserver) {
