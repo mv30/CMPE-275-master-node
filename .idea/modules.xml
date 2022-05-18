@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/CMPE-275-master-node.iml" filepath="$PROJECT_DIR$/.idea/CMPE-275-master-node.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data-node-replication/data-node-replication.iml" filepath="$PROJECT_DIR$/data-node-replication/data-node-replication.iml" />
       <module fileurl="file://$PROJECT_DIR$/proxy_node/proxy.iml" filepath="$PROJECT_DIR$/proxy_node/proxy.iml" />
     </modules>
   </component>
