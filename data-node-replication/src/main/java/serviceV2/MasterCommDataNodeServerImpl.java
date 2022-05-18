@@ -152,9 +152,12 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
                         newDateEntry.setKey(dataEntry.getKey());
                         Set<String> values = new HashSet<>(dataEntry.getValues());
                         values.remove(key);
+                        if(values.isEmpty()) {
+                            return null;
+                        }
                         newDateEntry.setValues(new ArrayList<>(values));
                         return newDateEntry;
-                    }).collect(Collectors.toList());
+                    }).filter(Objects::nonNull).collect(Collectors.toList());
             keyValueFileHandler.writeData(dataEntryList);
         } catch (Exception e) {
             throw new RuntimeException(e);
