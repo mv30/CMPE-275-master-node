@@ -80,6 +80,21 @@ public class MasterCommDataNodeClient {
         MasterCommDataNodeClient masterCommDataNodeClient = new MasterCommDataNodeClient("localhost", 6091);
         System.out.println("Testing Health Poll");
         masterCommDataNodeClient.healthPoll(DataPayload.newBuilder().build());
+
+        System.out.println("Testing new node update");
+
+        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("BMW").build());
+        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("Lexus").build());
+        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("Tesla").build());
+
+        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("Tahoe").build());
+        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("GMD").build());
+        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("Mahindra").build());
+
+        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("Ninja").build());
+        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("Y2k").build());
+        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("Duke KTM").build());
+
         System.out.println("Testing Set Data");
         masterCommDataNodeClient.setData(
                 DataPayload
@@ -103,10 +118,10 @@ public class MasterCommDataNodeClient {
         System.out.println("Testing remove Data");
         masterCommDataNodeClient.removeData(DataPayload.newBuilder().setKey("bikes").build());
         System.out.println(masterCommDataNodeClient.getData(DataPayload.newBuilder().setKey("bikes").build()).getValuesList());
-        System.out.println("Testing new node update");
-        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("amazon-cloud").build());
-        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("gcp-cloud").build());
-        masterCommDataNodeClient.newNodeUpdate(NewNodeUpdateRequest.newBuilder().setNewnodeip("azure-cloud").build());
+//        System.out.println("Testing remove data via node removal");
+//        masterCommDataNodeClient.nodeDownUpdate(NodeDownUpdateRequest.newBuilder().setNodeip("BMW").build());
+//        masterCommDataNodeClient.nodeDownUpdate(NodeDownUpdateRequest.newBuilder().setNodeip("Lexus").build());
+//        masterCommDataNodeClient.nodeDownUpdate(NodeDownUpdateRequest.newBuilder().setNodeip("Tesla").build());
         System.out.println(" Testing getNode of upload ");
         System.out.println(masterCommDataNodeClient.getNodeForUpload(GetNodeForUploadRequest.newBuilder().setFilename("Ok").build()));
         System.out.println(" Testing getNode of download ");
