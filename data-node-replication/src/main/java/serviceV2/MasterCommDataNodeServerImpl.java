@@ -81,14 +81,14 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
     *   Methods specific to Gateway
     * */
     @Override
-    public void newNodeUpdate(NewNodeUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
+    public void newNodeUpdate(NewNodeUpdateRequest request, StreamObserver<NewNodeUpdateResponse> responseObserver) {
         String key = request.getNewnodeip();
         try {
             activeNodesFileHandler.createOrUpdate( key, new ArrayList<>());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        responseObserver.onNext(StatusResponse.newBuilder().setStatus(Status.SUCCESS).build());
+        responseObserver.onNext(NewNodeUpdateResponse.newBuilder().setStatus("SUCCESS").build());
         responseObserver.onCompleted();
     }
 
@@ -139,7 +139,7 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
     *       Methods for Sentinel
     * */
     @Override
-    public void nodeDownUpdate(NodeDownUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
+    public void nodeDownUpdate(NodeDownUpdateRequest request, StreamObserver<NodeDownUpdateResponse> responseObserver) {
         List<DataEntry> dataEntryList = new ArrayList<>();
         String key = request.getNodeip();
         try {
@@ -159,7 +159,7 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        responseObserver.onNext(StatusResponse.newBuilder().setStatus(Status.SUCCESS).build());
+        responseObserver.onNext(NodeDownUpdateResponse.newBuilder().setStatus("SUCCESS").build());
         responseObserver.onCompleted();
     }
 

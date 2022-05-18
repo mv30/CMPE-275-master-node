@@ -140,28 +140,28 @@ public final class ReplicationGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<org.master.protos.NewNodeUpdateRequest,
-      org.master.protos.StatusResponse> getNewNodeUpdateMethod;
+      org.master.protos.NewNodeUpdateResponse> getNewNodeUpdateMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "NewNodeUpdate",
       requestType = org.master.protos.NewNodeUpdateRequest.class,
-      responseType = org.master.protos.StatusResponse.class,
+      responseType = org.master.protos.NewNodeUpdateResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<org.master.protos.NewNodeUpdateRequest,
-      org.master.protos.StatusResponse> getNewNodeUpdateMethod() {
-    io.grpc.MethodDescriptor<org.master.protos.NewNodeUpdateRequest, org.master.protos.StatusResponse> getNewNodeUpdateMethod;
+      org.master.protos.NewNodeUpdateResponse> getNewNodeUpdateMethod() {
+    io.grpc.MethodDescriptor<org.master.protos.NewNodeUpdateRequest, org.master.protos.NewNodeUpdateResponse> getNewNodeUpdateMethod;
     if ((getNewNodeUpdateMethod = ReplicationGrpc.getNewNodeUpdateMethod) == null) {
       synchronized (ReplicationGrpc.class) {
         if ((getNewNodeUpdateMethod = ReplicationGrpc.getNewNodeUpdateMethod) == null) {
           ReplicationGrpc.getNewNodeUpdateMethod = getNewNodeUpdateMethod =
-              io.grpc.MethodDescriptor.<org.master.protos.NewNodeUpdateRequest, org.master.protos.StatusResponse>newBuilder()
+              io.grpc.MethodDescriptor.<org.master.protos.NewNodeUpdateRequest, org.master.protos.NewNodeUpdateResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "NewNodeUpdate"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   org.master.protos.NewNodeUpdateRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.master.protos.StatusResponse.getDefaultInstance()))
+                  org.master.protos.NewNodeUpdateResponse.getDefaultInstance()))
               .setSchemaDescriptor(new ReplicationMethodDescriptorSupplier("NewNodeUpdate"))
               .build();
         }
@@ -233,28 +233,28 @@ public final class ReplicationGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<org.master.protos.NodeDownUpdateRequest,
-      org.master.protos.StatusResponse> getNodeDownUpdateMethod;
+      org.master.protos.NodeDownUpdateResponse> getNodeDownUpdateMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "NodeDownUpdate",
       requestType = org.master.protos.NodeDownUpdateRequest.class,
-      responseType = org.master.protos.StatusResponse.class,
+      responseType = org.master.protos.NodeDownUpdateResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<org.master.protos.NodeDownUpdateRequest,
-      org.master.protos.StatusResponse> getNodeDownUpdateMethod() {
-    io.grpc.MethodDescriptor<org.master.protos.NodeDownUpdateRequest, org.master.protos.StatusResponse> getNodeDownUpdateMethod;
+      org.master.protos.NodeDownUpdateResponse> getNodeDownUpdateMethod() {
+    io.grpc.MethodDescriptor<org.master.protos.NodeDownUpdateRequest, org.master.protos.NodeDownUpdateResponse> getNodeDownUpdateMethod;
     if ((getNodeDownUpdateMethod = ReplicationGrpc.getNodeDownUpdateMethod) == null) {
       synchronized (ReplicationGrpc.class) {
         if ((getNodeDownUpdateMethod = ReplicationGrpc.getNodeDownUpdateMethod) == null) {
           ReplicationGrpc.getNodeDownUpdateMethod = getNodeDownUpdateMethod =
-              io.grpc.MethodDescriptor.<org.master.protos.NodeDownUpdateRequest, org.master.protos.StatusResponse>newBuilder()
+              io.grpc.MethodDescriptor.<org.master.protos.NodeDownUpdateRequest, org.master.protos.NodeDownUpdateResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "NodeDownUpdate"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   org.master.protos.NodeDownUpdateRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.master.protos.StatusResponse.getDefaultInstance()))
+                  org.master.protos.NodeDownUpdateResponse.getDefaultInstance()))
               .setSchemaDescriptor(new ReplicationMethodDescriptorSupplier("NodeDownUpdate"))
               .build();
         }
@@ -472,7 +472,7 @@ public final class ReplicationGrpc {
      * </pre>
      */
     public void newNodeUpdate(org.master.protos.NewNodeUpdateRequest request,
-        io.grpc.stub.StreamObserver<org.master.protos.StatusResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<org.master.protos.NewNodeUpdateResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getNewNodeUpdateMethod(), responseObserver);
     }
 
@@ -496,7 +496,7 @@ public final class ReplicationGrpc {
      * </pre>
      */
     public void nodeDownUpdate(org.master.protos.NodeDownUpdateRequest request,
-        io.grpc.stub.StreamObserver<org.master.protos.StatusResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<org.master.protos.NodeDownUpdateResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getNodeDownUpdateMethod(), responseObserver);
     }
 
@@ -569,7 +569,7 @@ public final class ReplicationGrpc {
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 org.master.protos.NewNodeUpdateRequest,
-                org.master.protos.StatusResponse>(
+                org.master.protos.NewNodeUpdateResponse>(
                   this, METHODID_NEW_NODE_UPDATE)))
           .addMethod(
             getGetNodeForDownloadMethod(),
@@ -590,7 +590,7 @@ public final class ReplicationGrpc {
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 org.master.protos.NodeDownUpdateRequest,
-                org.master.protos.StatusResponse>(
+                org.master.protos.NodeDownUpdateResponse>(
                   this, METHODID_NODE_DOWN_UPDATE)))
           .addMethod(
             getGetListOfNodesMethod(),
@@ -679,7 +679,7 @@ public final class ReplicationGrpc {
      * </pre>
      */
     public void newNodeUpdate(org.master.protos.NewNodeUpdateRequest request,
-        io.grpc.stub.StreamObserver<org.master.protos.StatusResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<org.master.protos.NewNodeUpdateResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getNewNodeUpdateMethod(), getCallOptions()), request, responseObserver);
     }
@@ -706,7 +706,7 @@ public final class ReplicationGrpc {
      * </pre>
      */
     public void nodeDownUpdate(org.master.protos.NodeDownUpdateRequest request,
-        io.grpc.stub.StreamObserver<org.master.protos.StatusResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<org.master.protos.NodeDownUpdateResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getNodeDownUpdateMethod(), getCallOptions()), request, responseObserver);
     }
@@ -800,7 +800,7 @@ public final class ReplicationGrpc {
      * Methods required for Gateway
      * </pre>
      */
-    public org.master.protos.StatusResponse newNodeUpdate(org.master.protos.NewNodeUpdateRequest request) {
+    public org.master.protos.NewNodeUpdateResponse newNodeUpdate(org.master.protos.NewNodeUpdateRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getNewNodeUpdateMethod(), getCallOptions(), request);
     }
@@ -824,7 +824,7 @@ public final class ReplicationGrpc {
      * Methods required for Sentinel
      * </pre>
      */
-    public org.master.protos.StatusResponse nodeDownUpdate(org.master.protos.NodeDownUpdateRequest request) {
+    public org.master.protos.NodeDownUpdateResponse nodeDownUpdate(org.master.protos.NodeDownUpdateRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getNodeDownUpdateMethod(), getCallOptions(), request);
     }
@@ -918,7 +918,7 @@ public final class ReplicationGrpc {
      * Methods required for Gateway
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<org.master.protos.StatusResponse> newNodeUpdate(
+    public com.google.common.util.concurrent.ListenableFuture<org.master.protos.NewNodeUpdateResponse> newNodeUpdate(
         org.master.protos.NewNodeUpdateRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getNewNodeUpdateMethod(), getCallOptions()), request);
@@ -945,7 +945,7 @@ public final class ReplicationGrpc {
      * Methods required for Sentinel
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<org.master.protos.StatusResponse> nodeDownUpdate(
+    public com.google.common.util.concurrent.ListenableFuture<org.master.protos.NodeDownUpdateResponse> nodeDownUpdate(
         org.master.protos.NodeDownUpdateRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getNodeDownUpdateMethod(), getCallOptions()), request);
@@ -1038,7 +1038,7 @@ public final class ReplicationGrpc {
           break;
         case METHODID_NEW_NODE_UPDATE:
           serviceImpl.newNodeUpdate((org.master.protos.NewNodeUpdateRequest) request,
-              (io.grpc.stub.StreamObserver<org.master.protos.StatusResponse>) responseObserver);
+              (io.grpc.stub.StreamObserver<org.master.protos.NewNodeUpdateResponse>) responseObserver);
           break;
         case METHODID_GET_NODE_FOR_DOWNLOAD:
           serviceImpl.getNodeForDownload((org.master.protos.GetNodeForDownloadRequest) request,
@@ -1050,7 +1050,7 @@ public final class ReplicationGrpc {
           break;
         case METHODID_NODE_DOWN_UPDATE:
           serviceImpl.nodeDownUpdate((org.master.protos.NodeDownUpdateRequest) request,
-              (io.grpc.stub.StreamObserver<org.master.protos.StatusResponse>) responseObserver);
+              (io.grpc.stub.StreamObserver<org.master.protos.NodeDownUpdateResponse>) responseObserver);
           break;
         case METHODID_GET_LIST_OF_NODES:
           serviceImpl.getListOfNodes((org.master.protos.GetListOfNodesRequest) request,

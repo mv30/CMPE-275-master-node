@@ -42,9 +42,9 @@ public class MasterCommDataNodeClient {
         return stub.removeData(dataPayload);
     }
 
-    public StatusResponse newNodeUpdate( NewNodeUpdateRequest newNodeUpdateRequest) {
+    public NewNodeUpdateResponse newNodeUpdate( NewNodeUpdateRequest newNodeUpdateRequest) {
         stub.newNodeUpdate(newNodeUpdateRequest);
-        return StatusResponse.newBuilder().setStatus(Status.SUCCESS).build();
+        return NewNodeUpdateResponse.newBuilder().setStatus("SUCCESS").build();
     }
 
     public GetNodeForDownloadResponse getNodeForDownload(GetNodeForDownloadRequest getNodeForDownloadRequest) {
@@ -55,9 +55,9 @@ public class MasterCommDataNodeClient {
         return stub.getNodeForUpload(getNodeForUploadRequest);
     }
 
-    public StatusResponse nodeDownUpdate(NodeDownUpdateRequest nodeDownUpdateRequest) {
+    public NodeDownUpdateResponse nodeDownUpdate(NodeDownUpdateRequest nodeDownUpdateRequest) {
         stub.nodeDownUpdate(nodeDownUpdateRequest);
-        return StatusResponse.newBuilder().setStatus(Status.SUCCESS).build();
+        return NodeDownUpdateResponse.newBuilder().setStatus("SUCCESS").build();
     }
 
     public GetListOfNodesResponse getListOfNodes( GetListOfNodesRequest getListOfNodesRequest) {

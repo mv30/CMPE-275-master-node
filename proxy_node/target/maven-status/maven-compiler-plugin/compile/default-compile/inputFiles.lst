@@ -2,9 +2,11 @@
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/grpc-java/io/grpc/replication/DataNode/DataNodeStreamerGrpc.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/ReplicationDetailsResponseOrBuilder.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/src/main/java/ProxyNodeServer.java
+/Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NewNodeUpdateResponseOrBuilder.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NewNodeUpdateRequest.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/GetListOfNodesRequest.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NodeDownUpdateRequest.java
+/Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NodeDownUpdateResponse.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/GetNodeForDownloadRequestOrBuilder.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/io/grpc/replication/DataNode/DataNode.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NodeIpsReplyOrBuilder.java
@@ -13,6 +15,7 @@
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/ReplicationDetailsRequest.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/src/main/java/ProxyNodeClient.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/GetNodeForDownloadResponseOrBuilder.java
+/Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NewNodeUpdateResponse.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NewNodeUpdateRequestOrBuilder.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NodeIpsRequest.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/StatusResponseOrBuilder.java
@@ -45,6 +48,7 @@
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/Status.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/GetListOfFilesResponseOrBuilder.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/GetListOfNodesRequestOrBuilder.java
+/Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NodeDownUpdateResponseOrBuilder.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/DataPayload.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/NodeIpsReply.java
 /Users/mayankgarg/Documents/CMPE-275/new-project/CMPE-275-master-node/proxy_node/target/generated-sources/protobuf/java/org/master/protos/GetNodeForUploadResponseOrBuilder.java

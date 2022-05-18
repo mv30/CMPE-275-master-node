@@ -118,12 +118,12 @@ public class MasterCommMonitorService {
 
     }
 
-    public StatusResponse newNodeUpdate(NewNodeUpdateRequest newNodeUpdateRequest) {
+    public NewNodeUpdateResponse newNodeUpdate(NewNodeUpdateRequest newNodeUpdateRequest) {
         for(Map.Entry<Integer, IpDetailsEntry> entry: peers.entrySet()) {
             IpDetailsEntry ipDetailsEntry = entry.getValue();
             ipDetailsEntry.getMasterCommDataNodeClient().newNodeUpdate(newNodeUpdateRequest);
         }
-        return StatusResponse.newBuilder().setStatus(Status.SUCCESS).build();
+        return NewNodeUpdateResponse.newBuilder().setStatus("SUCCESS").build();
     }
 
     public GetNodeForDownloadResponse getNodeForDownload(GetNodeForDownloadRequest getNodeForDownloadRequest) {
@@ -147,12 +147,12 @@ public class MasterCommMonitorService {
         return ipDetailsEntry.getMasterCommDataNodeClient().getNodeForUpload(getNodeForUploadRequest);
     }
 
-    public StatusResponse nodeDownUpdate(NodeDownUpdateRequest nodeDownUpdateRequest) {
+    public NodeDownUpdateResponse nodeDownUpdate(NodeDownUpdateRequest nodeDownUpdateRequest) {
         for(Map.Entry<Integer, IpDetailsEntry> entry: peers.entrySet()) {
             IpDetailsEntry ipDetailsEntry = entry.getValue();
             ipDetailsEntry.getMasterCommDataNodeClient().nodeDownUpdate(nodeDownUpdateRequest);
         }
-        return StatusResponse.newBuilder().setStatus(Status.SUCCESS).build();
+        return NodeDownUpdateResponse.newBuilder().setStatus("SUCCESS").build();
     }
 
     public GetListOfNodesResponse getListOfNodes( GetListOfNodesRequest getListOfNodesRequest) {

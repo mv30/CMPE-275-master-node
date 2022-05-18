@@ -11,8 +11,8 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
     }
 
     @Override
-    public void newNodeUpdate(NewNodeUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
-        StatusResponse statusResponse = monitorService.newNodeUpdate(request);
+    public void newNodeUpdate(NewNodeUpdateRequest request, StreamObserver<NewNodeUpdateResponse> responseObserver) {
+        NewNodeUpdateResponse statusResponse = monitorService.newNodeUpdate(request);
         responseObserver.onNext(statusResponse);
         responseObserver.onCompleted();
     }
@@ -32,8 +32,8 @@ public class ReplicationService extends ReplicationGrpc.ReplicationImplBase {
     }
 
     @Override
-    public void nodeDownUpdate(NodeDownUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
-        StatusResponse response = monitorService.nodeDownUpdate(request);
+    public void nodeDownUpdate(NodeDownUpdateRequest request, StreamObserver<NodeDownUpdateResponse> responseObserver) {
+        NodeDownUpdateResponse response = monitorService.nodeDownUpdate(request);
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

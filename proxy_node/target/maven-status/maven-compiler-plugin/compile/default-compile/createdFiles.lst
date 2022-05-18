@@ -5,6 +5,7 @@ service/MasterCommDataNodeClient.class
 org/master/protos/NodeDownUpdateRequest$1.class
 org/master/protos/NodeIpsReplyOrBuilder.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$MethodHandlers.class
+org/master/protos/NodeDownUpdateResponse.class
 org/master/protos/ReplicationGrpc$ReplicationBlockingStub.class
 org/master/protos/GetNodeForDownloadRequestOrBuilder.class
 org/master/protos/GetNodeForUploadRequest$1.class
@@ -12,6 +13,7 @@ org/master/protos/DataPayloadOrBuilder.class
 org/master/protos/ReplicationDetailsRequest$Builder.class
 org/master/protos/NodeDownUpdateRequest.class
 org/master/protos/GetNodeForDownloadResponse.class
+org/master/protos/NodeDownUpdateResponse$Builder.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$DataNodeStreamerStub.class
 org/master/protos/StatusResponseOrBuilder.class
 org/master/protos/ReplicationDetailsResponseOrBuilder.class
@@ -23,14 +25,17 @@ org/master/protos/Status$1.class
 org/master/protos/StatusResponse$1.class
 io/grpc/replication/DataNode/DataPayload$Builder.class
 org/master/protos/GetNodeForDownloadResponse$1.class
+org/master/protos/NewNodeUpdateResponse$Builder.class
 service/MasterCommDataNodeServer.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$DataNodeStreamerBaseDescriptorSupplier.class
 org/master/protos/NodeDownUpdateRequest$Builder.class
 org/master/protos/GetNodeForDownloadRequest$1.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$DataNodeStreamerMethodDescriptorSupplier.class
+org/master/protos/NodeDownUpdateResponseOrBuilder.class
 io/grpc/replication/DataNode/DataPayloadOrBuilder.class
 org/master/protos/NodeIpsReply.class
 org/master/protos/GetNodeForUploadRequestOrBuilder.class
+org/master/protos/NewNodeUpdateResponseOrBuilder.class
 org/master/protos/MasterCommDataNode.class
 org/master/protos/GetNodeForUploadResponse.class
 org/master/protos/GetListOfNodesResponse$Builder.class
@@ -41,6 +46,7 @@ org/master/protos/ReplicationDetailsRequestOrBuilder.class
 org/master/protos/DataPayload$1.class
 io/grpc/replication/DataNode/DataNodeStreamerGrpc$DataNodeStreamerBlockingStub.class
 ProxyNodeClient.class
+org/master/protos/NodeDownUpdateResponse$1.class
 org/master/protos/NodeIpsReply$1.class
 service/FileHandler.class
 org/master/protos/ReplicationGrpc$ReplicationImplBase.class
@@ -106,6 +112,8 @@ org/master/protos/NewNodeUpdateRequest$Builder.class
 service/MasterCommDataNodeServerImpl.class
 org/master/protos/ReplicationDetailsRequest.class
 org/master/protos/ReplicationGrpc$2.class
+org/master/protos/NewNodeUpdateResponse$1.class
+org/master/protos/NewNodeUpdateResponse.class
 org/master/protos/ReplicationDetailsResponse$1.class
 org/master/protos/GetNodeForDownloadRequest$Builder.class
 service/ReplicationService.class

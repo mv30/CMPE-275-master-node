@@ -16,12 +16,12 @@ service Replication {
   rpc removeData(DataPayload) returns (DataPayload) {}
 
   // Methods required for Gateway
-  rpc NewNodeUpdate(NewNodeUpdateRequest) returns (StatusResponse) {}
+  rpc NewNodeUpdate(NewNodeUpdateRequest) returns (NewNodeUpdateResponse) {}
   rpc GetNodeForDownload(GetNodeForDownloadRequest) returns (GetNodeForDownloadResponse) {}
   rpc GetNodeForUpload(GetNodeForUploadRequest) returns (GetNodeForUploadResponse) {}
 
   // Methods required for Sentinel
-  rpc NodeDownUpdate(NodeDownUpdateRequest) returns (StatusResponse) {}
+  rpc NodeDownUpdate(NodeDownUpdateRequest) returns (NodeDownUpdateResponse) {}
   rpc GetListOfNodes(GetListOfNodesRequest) returns (GetListOfNodesResponse) {}
 
   // Methods required for Node
@@ -65,6 +65,10 @@ message NewNodeUpdateRequest {
   string newnodeip = 1;
 }
 
+message NewNodeUpdateResponse {
+  string status = 1;
+}
+
 // The response message containing the generic status of an incoming request
 message StatusResponse {
   Status status = 1;
@@ -89,6 +93,10 @@ message GetNodeForUploadResponse {
 
 message NodeDownUpdateRequest {
   string nodeip = 1;
+}
+
+message NodeDownUpdateResponse {
+  string status = 1;
 }
 
 message GetListOfFilesRequest {

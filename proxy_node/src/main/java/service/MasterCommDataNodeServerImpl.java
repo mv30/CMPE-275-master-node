@@ -81,14 +81,14 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
     *   Methods specific to Gateway
     * */
     @Override
-    public void newNodeUpdate(NewNodeUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
+    public void newNodeUpdate(NewNodeUpdateRequest request, StreamObserver<NewNodeUpdateResponse> responseObserver) {
         String key = request.getNewnodeip();
         try {
             activeNodesFileHandler.createOrUpdate( key, new ArrayList<>());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        responseObserver.onNext(StatusResponse.newBuilder().setStatus(Status.SUCCESS).build());
+        responseObserver.onNext(NewNodeUpdateResponse.newBuilder().setStatus("SUCCESS").build());
         responseObserver.onCompleted();
     }
 
@@ -112,16 +112,24 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
 
     @Override
     public void getNodeForUpload(GetNodeForUploadRequest request, StreamObserver<GetNodeForUploadResponse> responseObserver) {
-        List<String> values = new ArrayList<>();
+        List<String> activeServerNodes = new ArrayList<>();
+        List<String> fileOnServers = new ArrayList<>();
+        String fileName = request.getFilename();
         try {
-            values = activeNodesFileHandler.getFileContent().stream().map(DataEntry::getKey).collect(Collectors.toList());
+            activeServerNodes = activeNodesFileHandler.getFileContent().stream().map(DataEntry::getKey).collect(Collectors.toList());
+            fileOnServers = keyValueFileHandler.get(fileName);
+            if(fileOnServers!=null) {
+                Set<String> activeServerNodeSet = new HashSet<>(activeServerNodes);
+                activeServerNodeSet.removeAll(fileOnServers);
+                activeServerNodes = new ArrayList<>(activeServerNodeSet);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        Collections.shuffle(values);
+        Collections.shuffle(activeServerNodes);
         String nodeIp = "";
-        if(!values.isEmpty()) {
-            nodeIp = values.get(0);
+        if(!activeServerNodes.isEmpty()) {
+            nodeIp = activeServerNodes.get(0);
         }
         responseObserver.onNext(GetNodeForUploadResponse.newBuilder().setNodeip(nodeIp).build());
         responseObserver.onCompleted();
@@ -131,7 +139,7 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
     *       Methods for Sentinel
     * */
     @Override
-    public void nodeDownUpdate(NodeDownUpdateRequest request, StreamObserver<StatusResponse> responseObserver) {
+    public void nodeDownUpdate(NodeDownUpdateRequest request, StreamObserver<NodeDownUpdateResponse> responseObserver) {
         List<DataEntry> dataEntryList = new ArrayList<>();
         String key = request.getNodeip();
         try {
@@ -151,7 +159,7 @@ public class MasterCommDataNodeServerImpl extends ReplicationGrpc.ReplicationImp
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        responseObserver.onNext(StatusResponse.newBuilder().setStatus(Status.SUCCESS).build());
+        responseObserver.onNext(NodeDownUpdateResponse.newBuilder().setStatus("SUCCESS").build());
         responseObserver.onCompleted();
     }
 

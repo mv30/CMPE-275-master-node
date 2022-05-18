@@ -22,7 +22,7 @@ public class ProxyNodeClient {
     }
 
     public void addNewNode(String nodeIp) {
-        StatusResponse response = replicationBlockingStub.newNodeUpdate(NewNodeUpdateRequest.newBuilder().
+        NewNodeUpdateResponse response = replicationBlockingStub.newNodeUpdate(NewNodeUpdateRequest.newBuilder().
                 setNewnodeip(nodeIp).build());
         System.out.println(response.getStatus());
     }
@@ -40,7 +40,7 @@ public class ProxyNodeClient {
     }
 
     public void getNodeDownUpdate(String nodeIp) {
-        StatusResponse response = replicationBlockingStub.nodeDownUpdate(NodeDownUpdateRequest.newBuilder().
+        NodeDownUpdateResponse response = replicationBlockingStub.nodeDownUpdate(NodeDownUpdateRequest.newBuilder().
                 setNodeip(nodeIp).build());
         System.out.println(response.getStatus());
     }
